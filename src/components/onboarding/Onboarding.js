@@ -1,12 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Onboarding from './src/components/onboarding/onboarding';
 
-export default function App() {
+export default function Onboarding() {
   return (
     <View style={styles.container}>
-      <Onboarding ></Onboarding>
-      <StatusBar style="auto" />
+      <Text>This is Onboarding</Text>
     </View>
   );
 }
