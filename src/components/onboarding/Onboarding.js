@@ -1,10 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import slides from "../../../slides";
+import OnboardingItem from "./OnboardingItem";
 
 export default function Onboarding() {
   return (
     <View style={styles.container}>
-      <Text>This is Onboarding</Text>
+      <FlatList
+        data={slides}
+        renderItem={({ item }) => <OnboardingItem item={item} />}
+        horizontal
+        showsHorizontalScrollIndicator
+        pagingEnabled
+        bounces={false}
+      />
     </View>
   );
 }
@@ -12,8 +21,8 @@ export default function Onboarding() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
