@@ -11,6 +11,8 @@ export default function CommonTextInput({
     type = "default", // "default","password","cancelable"
     placeholder,
     fontSize=24,
+    value,
+    onChangeText,
     ...props
 }) {
     const [currentText, setCurrentText] = useState("");
@@ -29,7 +31,7 @@ export default function CommonTextInput({
     }
     const cancel = () => {
         return (
-            <TouchableOpacity onPress={()=>{props.onChangeText("")}}>
+            <TouchableOpacity onPress={()=>{onChangeText("")}}>
                 <MaterialCommunityIcons name="close-circle-outline" size={fontSize} color={primarycolor} />
             </TouchableOpacity>
         );
@@ -43,6 +45,8 @@ export default function CommonTextInput({
                     placeholder={placeholder}
                     secureTextEntry={hideState}
                     color={primarycolor}
+                    value={value}
+                    onChangeText={onChangeText}
                     {...props}
                 />
                 {type === "hide" ? hide() : (type === "cancelable" ? cancel() : null)}
