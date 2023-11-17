@@ -1,0 +1,78 @@
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Image, ImageBackground,ScrollView} from "react-native";
+import CommonButton from "../components/button";
+import CommonTextInput from "../components/textInput";
+import { colorPalette } from "../utils/systemDesign";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { welcomeStyle } from "../style/welcomeStyle";
+// import { LoginRegisterBackGround } from "../components/linearGradients";
+
+export default function RegisterPage() {
+    const navigation=useNavigation();
+    //get input from text
+    const [name,changeName]=useState('');
+    const [email,changeEmail]=useState('');
+    const [password,changePassword]=useState('');
+    const [verifyPassword,changeVerifyPassword]=useState('');
+    //display input error
+    const [error,changeError]=useState('');
+    
+    const registerWithGoogle = () => {
+
+    }
+    const register = () => {
+
+    }
+    const back = () => {
+        navigation.goBack()
+    }
+    return (
+        <View style={{ flex: 1 }}>
+            <ImageBackground source={require('../../assets/Onboarding.png')} resizeMode="stretch" style={welcomeStyle.bgimg}>
+                <View style={welcomeStyle.common}>
+                    <View style={{ width: '100%' }}>
+                        <CommonButton width="20%" containerStyle={{}} style={{ flexDirection: 'row' }} action={back}>
+                            <MaterialCommunityIcons name="chevron-left" size={24} color={colorPalette.color12} />
+                            <Text style={{ color: colorPalette.color12, fontSize: 18 }}>Back</Text>
+                        </CommonButton>
+                    </View>
+                    <Text style={welcomeStyle.titletext}>Register</Text>
+                    <Text style={welcomeStyle.smalltext}>{error}</Text>
+                    <Text style={welcomeStyle.smallText}>Enter your name</Text>
+                    <CommonTextInput placeholder={"Your name"} type="cancelable" value={name} onChangeText={(e)=>{changeName(e)}}/>
+
+                    <Text style={welcomeStyle.smallText}>Enter your email</Text>
+                    <CommonTextInput placeholder={"Your email"} type="cancelable" value={email} onChangeText={(e)=>{changeEmail(e)}}/>
+
+                    <Text style={welcomeStyle.smallText}>Enter your password</Text>
+                    <CommonTextInput placeholder={"Your password"} type="hide" value={password} onChangeText={(e)=>{changePassword(e)}}/>
+
+                    <Text style={welcomeStyle.smallText}>Verify your password</Text>
+                    <CommonTextInput placeholder={"Verify your password"} type="hide" value={verifyPassword} onChangeText={(e)=>{changeVerifyPassword(e)}}/>
+
+                    <View style={{height:'3%'}}>
+
+                    </View>
+
+                    <CommonButton style={welcomeStyle.submit} containerStyle={welcomeStyle.submitContainer} action={register}>
+                        <Text style={[welcomeStyle.text, { color: colorPalette.color4 }]}>Register</Text>
+                    </CommonButton>
+
+                    <View style={{ flexDirection: 'row', alignItems: 'center', margin: '5%', width: '100%' }}>
+                        <View style={{ flex: 1, height: 1, backgroundColor: colorPalette.color6 }} />
+                        <View>
+                            <Text style={{ width: 40, textAlign: 'center', color: colorPalette.color6 }}>Or</Text>
+                        </View>
+                        <View style={{ flex: 1, height: 1, backgroundColor: colorPalette.color6 }} />
+                    </View>
+
+                    <CommonButton style={welcomeStyle.button} action={registerWithGoogle}>
+                        <Image source={require('../../assets/google.png')} style={{ width: 28, height: 28 }} />
+                        <Text style={{ color: colorPalette.color10, paddingLeft: 8 }}>Continue with Google</Text>
+                    </CommonButton>
+                </View>
+            </ImageBackground>
+        </View>
+    )
+}
