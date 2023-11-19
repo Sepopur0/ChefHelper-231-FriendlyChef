@@ -28,13 +28,11 @@ export default function Onboarding() {
       type={'fullscreen'}
       titleStyle={styles.titleStyle}
       subtitleStyle={styles.subtitleStyle}
-
       paginationSelectedColor={'#FCF0DA'}
-      // paginationColor: '#00f',
-      primaryButtonStyle={{ backgroundColor: '#FCF0DA', shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 10, shadowOffset: { width: 3, height: 3 } }}
-      primaryButtonTextStyle={{ color: '#000', fontFamily: 'Judson', fontWeight: 'bold', fontSize: 20 }}
+      primaryButtonStyle={styles.buttonStyle}
+      primaryButtonTextStyle={styles.buttonTextStyle}
       showDismissButton={true}
-      dismissButtonStyle={{ backgroundColor: '#FCF0DA', shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 10, shadowOffset: { width: 3, height: 3 } }}
+      dismissButtonStyle={styles.buttonStyle}
     />
   );
 }
@@ -50,5 +48,18 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#000',
     fontFamily: 'Judson',
+  },
+  buttonStyle: {
+    backgroundColor: '#FCF0DA',
+    shadowColor: '#000',
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    shadowOffset: { width: 3, height: 3 },
+  },
+  buttonTextStyle: {
+    color: '#000',
+    fontSize: 20,
+    fontFamily: 'Judson',
+    fontWeight: 'bold',
   },
 });
