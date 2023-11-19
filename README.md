@@ -53,5 +53,10 @@ For more information: https://docs.expo.dev/
 
 1. pages: containing main pages like upload, profile,recipe details,...
 2. components: containing commono components (button, dropdown,...) or components that appear multiple times as well (step upload,...)
-3. ultils: containing substitued information (like color palette, typography, size,...) and helper functions
-(may need a fourth folder for database connection)
+3. utils: containing substitued information (like color palette, typography, size,...) and helper functions
+4. style: contain styling for components
+
+III/ Sharing project:
+- Recommend to create a new branch and only merge with main after announcing with team or all conflicts have been solved.
+- Create pull request after  completing a feature, not recommend to request after completing a whole lot.
+- Create branch by feature.
