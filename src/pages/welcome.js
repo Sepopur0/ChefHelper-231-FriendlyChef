@@ -20,7 +20,7 @@ export default function Welcome() {
 
         <ImageBackground source={require('../../assets/Welcome.png')} resizeMode="stretch" style={welcomeStyle.bgimg}>
             <View style={{ flex: 1, flexDirection: 'column-reverse', alignItems: 'center' }}>
-                <View style={{ width: '100%',marginBottom:'45%',alignItems:'center' }}>
+                <View style={{ width: '100%',marginBottom:'35%',alignItems:'center' }}>
                     <CommonButton width="30%" containerStyle={{}} style={{ flexDirection: 'row',justifyContent:'center',alignItems:'center'}} action={toHome}>
                         <Text style={{ color: colorPalette.color4, fontSize: 18 }}>Skip</Text>
                         <MaterialCommunityIcons name="chevron-double-right" size={24} color={colorPalette.color4} />

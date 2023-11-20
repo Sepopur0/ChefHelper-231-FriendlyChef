@@ -1,9 +1,9 @@
 import { Animated, SafeAreaView, StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { Dimensions } from "react-native";
 import { useEffect, useState, useRef } from "react";
-import { useNavigation } from "@react-navigation/native";
-import slides from "./slides";
-
+import { useNavigation,CommonActions } from "@react-navigation/native";
+import slides from "../components/slides";
+import CommonButton from "../components/button";
 export default function Onboarding() {
   const navigation = useNavigation();
   const [completed, setCompleted] = useState(false);
@@ -18,7 +18,14 @@ export default function Onboarding() {
     })
     return () => scrollX.removeListener();
   }, [])
-
+  const toWelcome=()=>{
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: 'Authencitation' }],
+      })
+    )
+  }
 
 
 
@@ -37,20 +44,24 @@ export default function Onboarding() {
       ref={scrollRef}
       onScrollEndDrag={() => {
         if (completed) {
-          navigation.navigate('Welcome');
+          // navigation.navigate('Authencitation');
+          toWelcome();
         }
       }}
     >
       {slides.map((slide, index) => (
         <View key={index} style={styles.container}>
           {/* skip button */}
-          <Pressable style={styles.skipContain}
+          {/* <Pressable style={styles.skipContain}
             onPress={() => {
-              navigation.navigate('Welcome');
+              navigation.navigate('Authencitation');
             }}
           >
             <Text style={styles.skipStyle}>Skip</Text>
-          </Pressable>
+          </Pressable> */}
+          <CommonButton style={{}} containerStyle={styles.skipContain} width="10%" action={toWelcome}>
+            <Text style={styles.skipStyle}>Skip</Text>
+          </CommonButton>
           <View style={styles.imageContain}>
             <Image source={
               slide.image
@@ -68,7 +79,8 @@ export default function Onboarding() {
               style={styles.buttonStyle}
               onPress={() => {
                 if (completed) {
-                  navigation.navigate('Welcome');
+                  // navigation.navigate('Authencitation');
+                  toWelcome()
                 }
                 setCompleted(false);
                 // next slide
