@@ -1,9 +1,11 @@
 import { Animated, SafeAreaView, StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { Dimensions } from "react-native";
-import slides from "./slides";
 import { useEffect, useState, useRef } from "react";
+import { useNavigation } from "@react-navigation/native";
+import slides from "./slides";
 
 export default function Onboarding() {
+  const navigation = useNavigation();
   const [completed, setCompleted] = useState(false);
 
   const scrollX = new Animated.Value(0);
@@ -33,6 +35,11 @@ export default function Onboarding() {
         { useNativeDriver: false }
       )}
       ref={scrollRef}
+      onScrollEndDrag={() => {
+        if (completed) {
+          navigation.navigate('Welcome');
+        }
+      }}
     >
       {slides.map((slide, index) => (
         <View key={index} style={styles.container}>
@@ -57,7 +64,7 @@ export default function Onboarding() {
               style={styles.buttonStyle}
               onPress={() => {
                 if (completed) {
-                  console.warn('completed');
+                  navigation.navigate('Welcome');
                 }
                 setCompleted(false);
                 // next slide
