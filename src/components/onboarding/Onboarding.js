@@ -44,9 +44,13 @@ export default function Onboarding() {
       {slides.map((slide, index) => (
         <View key={index} style={styles.container}>
           {/* skip button */}
-          <View style={styles.skipContain}>
+          <Pressable style={styles.skipContain}
+            onPress={() => {
+              navigation.navigate('Welcome');
+            }}
+          >
             <Text style={styles.skipStyle}>Skip</Text>
-          </View>
+          </Pressable>
           <View style={styles.imageContain}>
             <Image source={
               slide.image
