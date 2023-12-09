@@ -3,12 +3,7 @@ import useCategories from '../services/recipe/fetch-all-category';
 import { RecipeCardStyle } from '../style/recipe-card-style';
 import { View, Text, Image } from 'react-native';
 const RecipeCard = ({recipe}) => {
-  console.log('recipe category id:', recipe.category[0])
   const {data: category, error: categoryError, isLoading: categoryIsLoading} = useCategory(recipe.category[0]);
-  // const { data: categoryData, error: categoryError, isLoading: categoryIsLoading } = useCategories();
-  // console.log('category response', category);
-  // console.log(categoryData.data[0])
-  // console.log('categoryData', category.data);
   return(
     <View style={RecipeCardStyle.container}>
       <Image
