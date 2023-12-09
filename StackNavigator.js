@@ -4,6 +4,7 @@ import LoginPage from "./src/pages/login";
 import RegisterPage from "./src/pages/register";
 import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
+import HomePage from "./src/pages/home";
 const Stack = createStackNavigator()
 
 const Authencitation = () => {
@@ -22,7 +23,15 @@ const Onboard = () => {
         </Stack.Navigator>
     )
 }
+const Home = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="HomePage" component={HomePage} options={{ headerShown: false }} />
+        </Stack.Navigator>
+    )
+}
 export {
     Authencitation,
-    Onboard
+    Onboard,
+    Home
 }
