@@ -2,7 +2,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Authencitation, Home, HelpNavigator } from './StackNavigator';
+import { Authencitation, Home, HelpNavigator, Detail } from './StackNavigator';
 import { Onboard } from './StackNavigator';
 import RecipeByCategoryPage from './src/pages/recipeByCategory';
 import HomePage from './src/pages/home';
@@ -15,9 +15,8 @@ export default function App() {
         <Stack.Navigator>
           <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }} />
           <Stack.Screen name="Authencitation" component={Authencitation} options={{ headerShown: false }} />
-          <Stack.Screen name="Help" component={HelpNavigator} options={{ headerShown: false }} />
-          <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
-          <Stack.Screen name="RecipeByCategory" component={RecipeByCategoryPage} options={{headerShown:false}}/>
+          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+          <Stack.Screen name="DetailRecipe" component={Detail} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>
