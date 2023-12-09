@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, StatusBar, Text } from "react-native";
 import { HomeStyle } from "../style/home-style";
 import useCategories from "../services/recipe/fetch-all-category";
@@ -11,9 +11,8 @@ export default function HomePage() {
   const [pageName, setPageName] = useState('Home');
   const { data: categoryData, error: categoryError, isLoading: categoryIsLoading } = useCategories();
   const { data: popularRecipes, error: popularRecipeError, isLoading: popularRecipeIsLoading } = useRecipes(null, 8);
-
+  
   if (categoryIsLoading || popularRecipeIsLoading) {
-    // Render a loading spinner or some indication that data is loading
     return (
       <SafeAreaView style={HomeStyle.container}>
         <StatusBar style={HomeStyle.statusBar}/>
@@ -22,31 +21,35 @@ export default function HomePage() {
     );
   }
   
-  const categories = categoryData.data;
-  console.log('categories', categories);
-  console.log('popularRecipes:', popularRecipes);
-  console.log(popularRecipes.data, popularRecipes.data?.length > 0);
-  
+  // const categoryRecipeData = categoryData.data.map((category) => {
+  //   const { data: recipes, error: recipeError, isLoading: recipeIsLoading } = useRecipes(null, category.id);
+  //   return {
+  //     category,
+  //     recipes,
+  //     recipeError,
+  //     recipeIsLoading,
+  //   };
+  // })
+
   return (
     <SafeAreaView style={HomeStyle.container}>
       <StatusBar style={HomeStyle.statusBar}/>
       <CommonTopBarNavigator pageName={pageName}/>
-      
-      {/* Render content when popular recipes are available */}
+
       {popularRecipes.data && popularRecipes.data?.length > 0 && (
         <View style={HomeStyle.recipeByCategoryContainer}>
           <Text style={HomeStyle.categoryText}>Popular</Text>
           <RecipeCard recipe={popularRecipes.data[0]}/>
         </View>
       )}
-  
-      {/* Uncomment the following code for rendering categories */}
-      {/* {Array.isArray(categories) && categories.map((category) => (
-        <View key={category.id}>
-          <Text style={HomeStyle.text}>{category.name}</Text>
-          {/* Note: You may want to handle loading and errors for each category separately */}
-          {/* {category.id && <RecipeCard recpie={useRecipes(null, category.id).data[0]}/>}
-        </View>
+
+      {/* {Array.isArray(categoryRecipeData) && categoryRecipeData.map(({ category, recipeIsLoading, recipes }) => (
+        !recipeIsLoading && recipes.data.length !== 0 && (
+          <View key={category.id} style={HomeStyle.recipeByCategoryContainer}>
+            <Text style={HomeStyle.categoryText}>{category.name}</Text>
+            {category.id && <RecipeCard recipe={recipes.data[0]}/>}
+          </View>
+        )
       ))} */}
     </SafeAreaView>
   );
