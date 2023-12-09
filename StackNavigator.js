@@ -4,6 +4,7 @@ import LoginPage from "./src/pages/login";
 import RegisterPage from "./src/pages/register";
 import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
+
 const Stack = createStackNavigator()
 
 const Authencitation = () => {

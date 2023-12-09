@@ -3,7 +3,7 @@ import { colorPalette } from "../utils/systemDesign";
 export const welcomeStyle = StyleSheet.create({
     common: {
         padding: 8,
-        paddingTop: '10%',
+        paddingBottom:'10%',
         alignItems: 'center',
     },
     bgimg: {
@@ -33,6 +33,7 @@ export const welcomeStyle = StyleSheet.create({
     },
     titletext: {
         fontSize: 32,
+        marginTop:'10%',
     },
     submmitContainer: {
         overflow: 'hidden',
