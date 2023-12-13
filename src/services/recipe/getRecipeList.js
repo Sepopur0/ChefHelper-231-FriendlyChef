@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import {BACKEND_API_PREFIX} from './../../constants/index'
+import {BACKEND_API_PREFIX} from '../../constants/index'
 axiosRetry(axios, { retries: 5 });
 const fetchRecipes = async (isCommon, categoryId) => {
   let params = {};
@@ -24,5 +24,8 @@ const fetchRecipes = async (isCommon, categoryId) => {
   }
 };
 
-const useRecipes = (isCommon, categoryId) => useQuery([`${BACKEND_API_PREFIX}recipe`, isCommon, categoryId], () => fetchRecipes(isCommon, categoryId));
+const useRecipes = (isCommon, categoryId) => useQuery([`${BACKEND_API_PREFIX}recipe`, isCommon, categoryId], () => fetchRecipes(isCommon, categoryId),{
+  enabled: !!isCommon,
+  enabled: !!categoryId,
+});
 export default useRecipes;
