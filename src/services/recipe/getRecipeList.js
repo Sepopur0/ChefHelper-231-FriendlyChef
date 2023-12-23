@@ -11,8 +11,7 @@ const fetchRecipes = async (isCommon, categoryId) => {
   if (typeof categoryId === 'number') {
     params.categoryId = categoryId;
   }
-  const apiUrl = `${BACKEND_API_PREFIX}recipe`;
-
+  console.log('Params: ',params);
   try { 
     const response = await axios.get(`${BACKEND_API_PREFIX}recipe`, {
       params: params,
