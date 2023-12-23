@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { View, SafeAreaView, StatusBar, Text } from "react-native";
+import { View, SafeAreaView, StatusBar, Text, ScrollView, TouchableOpacity } from "react-native";
 import { HomeStyle } from "../style/homeStyle";
 import useCategories from "../services/recipe/fetchAllRecipes";
 import useRecipes from "../services/recipe/getRecipeList";
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation
 
 import CommonTopBarNavigator from "../components/topBarNavigator";
 import RecipeCard from "../components/recipeCard";
 import HomeSearchBar from "../components/searchBar"
+import BottomNavigator from "../components/bottomNavigator";
 
 export default function HomePage() {
   const [pageName, setPageName] = useState('Home');
   const [searchPhrase, setSearchPhrase] = useState("");
+  const navigation = useNavigation(); // Initialize useNavigation
 
   const handleSearchPhraseChange = (text) => {
     console.log("Search phrase changed:", text);
@@ -22,6 +25,10 @@ export default function HomePage() {
     console.log("Search button clicked")
   }
   
+  const toRecipesByCategory = (id, name, isCommon) => {
+    navigation.navigate("RecipeByCategory", { id: id, name: name });
+  }
+
   //Hard code until i find out how to fix bug
   const categoryData = [
     {
@@ -107,21 +114,28 @@ export default function HomePage() {
         searchButtonClick={handleSearchButtonClick}
       />
 
-      {popularRecipes.data && popularRecipes.data?.length > 0 && (
-        <View style={HomeStyle.recipeByCategoryContainer}>
-          <Text style={HomeStyle.categoryText}>Popular</Text>
-          <RecipeCard recipe={popularRecipes.data[0]}/>
-        </View>
-      )}
-
-      {Array.isArray(recipeByCategory) && recipeByCategory.map(({ category, recipeIsLoading, recipes }) => (
-        !recipeIsLoading && recipes.data.length !== 0 && (
-          <View key={category.id} style={HomeStyle.recipeByCategoryContainer}>
-            <Text style={HomeStyle.categoryText}>{category.name}</Text>
-            {category.id && <RecipeCard recipe={recipes.data[0]}/>}
+      <ScrollView>
+        {popularRecipes.data && popularRecipes.data?.length > 0 && (
+          <View style={HomeStyle.recipeByCategoryContainer}>
+            <TouchableOpacity onPress={()=>toRecipesByCategory(null, null, true)}>
+              <Text style={HomeStyle.categoryText}>Popular</Text>
+              </TouchableOpacity>
+            <RecipeCard recipe={popularRecipes.data[0]}/>
           </View>
-        )
-      ))}
+        )}
+
+        {Array.isArray(recipeByCategory) && recipeByCategory.map(({ category, recipeIsLoading, recipes }) => (
+          !recipeIsLoading && recipes.data.length !== 0 && (
+            <View key={category.id} style={HomeStyle.recipeByCategoryContainer}>
+              <TouchableOpacity onPress={()=>toRecipesByCategory(category.id, category.name, false)}>
+              <Text style={HomeStyle.categoryText}>{category.name}</Text>
+              </TouchableOpacity>
+              {category.id && <RecipeCard recipe={recipes.data[0]}/>}
+            </View>
+          )
+        ))}
+      </ScrollView>
+      <BottomNavigator buttonIndex={1}/>
     </SafeAreaView>
   );
 }
