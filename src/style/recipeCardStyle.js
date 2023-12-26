@@ -6,6 +6,7 @@ export const RecipeCardStyle = StyleSheet.create({
     width: '100%',
     backgroundColor: colorPalette.color10,
     borderRadius: 20,
+    marginVertical: 10,
     overflow: 'hidden', // This is important to clip the border
   },
   rowContainer: {

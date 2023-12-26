@@ -36,4 +36,11 @@ export const HomeStyle = StyleSheet.create({
         color: colorPalette.color4,
         fontWeight: 'bold',
     },
+    searchNotFoundText: {
+        textAlign: 'center',
+        marginVertical: 10,
+        fontSize: 20,
+        color: colorPalette.color4,
+        fontWeight: 'bold',
+    },
 })
