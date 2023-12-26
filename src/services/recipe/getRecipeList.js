@@ -3,13 +3,16 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {BACKEND_API_PREFIX} from '../../constants/index'
 axiosRetry(axios, { retries: 5 });
-const fetchRecipes = async (isCommon, categoryId) => {
+const fetchRecipes = async (isCommon, categoryId, searchPhrase) => {
   let params = {};
   if (typeof isCommon === 'boolean') {
     params.isCommon = isCommon;
   }
   if (typeof categoryId === 'number') {
     params.categoryId = categoryId;
+  }
+  if (typeof searchPhrase === 'string' && searchPhrase != '') {
+    params.search = searchPhrase;
   }
   console.log('Params: ',params);
   try { 
@@ -23,8 +26,5 @@ const fetchRecipes = async (isCommon, categoryId) => {
   }
 };
 
-const useRecipes = (isCommon, categoryId) => useQuery([`${BACKEND_API_PREFIX}recipe`, isCommon, categoryId], () => fetchRecipes(isCommon, categoryId),{
-  enabled: !!isCommon,
-  enabled: !!categoryId,
-});
+const useRecipes = (isCommon, categoryId, searchPhrase) => useQuery([`${BACKEND_API_PREFIX}recipe`, isCommon, categoryId, searchPhrase], () => fetchRecipes(isCommon, categoryId, searchPhrase),{});
 export default useRecipes;
