@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, SafeAreaView, StatusBar, Text, ScrollView, TouchableOpacity } from "react-native";
 import { HomeStyle } from "../style/homeStyle";
-import useCategories from "../services/recipe/fetchAllRecipes";
+import useCategories from "../services/recipe/fetchAllCategories";
 import useRecipes from "../services/recipe/getRecipeList";
 import { useNavigation } from "@react-navigation/native"; // Import useNavigation
 
