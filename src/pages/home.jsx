@@ -7,21 +7,22 @@ import { useNavigation } from "@react-navigation/native"; // Import useNavigatio
 
 import CommonTopBarNavigator from "../components/topBarNavigator";
 import RecipeCard from "../components/recipeCard";
-import HomeSearchBar from "../components/searchBar"
+import HomeSearchBar from "../components/searchBar";
 import BottomNavigator from "../components/bottomNavigator";
 
 export default function HomePage() {
   const [pageName, setPageName] = useState('Home');
-  const [searchPhrase, setSearchPhrase] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [searchPhrase, setSearchPhrase] = useState(searchText);
   const navigation = useNavigation(); // Initialize useNavigation
 
-  const handleSearchPhraseChange = (text) => {
-    console.log("Search phrase changed:", text);
-    setSearchPhrase(text);
+  const handleSearchTextChange = (text) => {
+    setSearchText(text);
   };
 
   const handleSearchButtonClick = () => {
     //Call api using searchPhrase
+    setSearchPhrase(searchText);
     console.log("Search button clicked")
   }
   
@@ -83,6 +84,8 @@ export default function HomePage() {
   // const { data: categoryData, error: categoryError, isLoading: categoryIsLoading } = useCategories();
   const { data: popularRecipes, error: popularRecipeError, isLoading: popularRecipeIsLoading } = useRecipes(null, 8);
 
+  const { data: searchedRecipes, error: searchedRecipeError, isLoading: searchedRecipesIsLoading } = useRecipes(null, null, searchPhrase); 
+
   const recipeByCategory = categoryData.map((category) => {
     const { data: recipes, error: recipeError, isLoading: recipeIsLoading } = useRecipes(null, category.id);
     return {
@@ -95,6 +98,43 @@ export default function HomePage() {
   
   const recipeByCategoryIsLoading = recipeByCategory.some(item => item.recipeIsLoading);
 
+  if(searchPhrase != ""){
+    if(searchedRecipesIsLoading) {
+      return (
+        <SafeAreaView style={HomeStyle.container}>
+          <StatusBar style={HomeStyle.statusBar}/>
+          <Text style={HomeStyle.categoryText}>Loading...</Text>
+        </SafeAreaView>
+      );
+    }
+    return (
+      <SafeAreaView style={HomeStyle.container}>
+      <StatusBar style={HomeStyle.statusBar}/>
+      <CommonTopBarNavigator pageName={pageName}/>
+      <HomeSearchBar
+        searchPhrase={searchText}
+        setSearchPhrase={handleSearchTextChange}
+        searchButtonClick={handleSearchButtonClick}
+      />
+      
+      <View>
+      {Array.isArray(searchedRecipes.data) && searchedRecipes.data.length == 0 && <Text style={HomeStyle.searchNotFoundText}>
+        There is no recipes that match your keyword, try another one
+      </Text>}
+      </View>
+    
+
+      <ScrollView>
+        {Array.isArray(searchedRecipes.data) && searchedRecipes.data.length > 0 && searchedRecipes.data.map((recipe) => 
+          <View style={HomeStyle.recipeByCategoryContainer}>
+            <RecipeCard recipe={recipe} key={recipe.id}/>
+          </View>
+        )}
+      </ScrollView>
+      <BottomNavigator buttonIndex={1}/>
+    </SafeAreaView>
+    )
+  }
   if (popularRecipeIsLoading || recipeByCategoryIsLoading) {
     return (
       <SafeAreaView style={HomeStyle.container}>
@@ -109,8 +149,8 @@ export default function HomePage() {
       <StatusBar style={HomeStyle.statusBar}/>
       <CommonTopBarNavigator pageName={pageName}/>
       <HomeSearchBar
-        searchPhrase={searchPhrase}
-        setSearchPhrase={handleSearchPhraseChange}
+        searchPhrase={searchText}
+        setSearchPhrase={handleSearchTextChange}
         searchButtonClick={handleSearchButtonClick}
       />
 
