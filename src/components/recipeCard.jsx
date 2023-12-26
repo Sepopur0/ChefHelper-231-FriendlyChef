@@ -1,5 +1,5 @@
 import useCategory from '../services/recipe/getCategoryById';
-import useCategories from '../services/recipe/fetchAllRecipes';
+import useCategories from '../services/recipe/fetchAllCategories';
 import { RecipeCardStyle } from '../style/recipeCardStyle';
 import { View, Text, Image } from 'react-native';
 const RecipeCard = ({recipe}) => {
