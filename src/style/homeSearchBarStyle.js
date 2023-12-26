@@ -10,7 +10,8 @@ export const HomeSearchBarStyle = StyleSheet.create({
     paddingHorizontal: 10,
     height: 40,
     backgroundColor: colorPalette.color10,
-    borderRadius: 10
+    borderRadius: 10,
+    marginVertical: 10,
   },
   textField: {
     width: '90%',
