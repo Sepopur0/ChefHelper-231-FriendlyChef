@@ -14,7 +14,7 @@ export default function App() {
           {/* <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }} />
           <Stack.Screen name="Authencitation" component={Authencitation} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} /> */}
-          <Stack.Screen name="DetailRecipe" component={Detail} options={{ headerShown: false }} />
+          <Stack.Screen name="Detail" component={Detail} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>
