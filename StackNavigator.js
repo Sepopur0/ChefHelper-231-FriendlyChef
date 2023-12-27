@@ -48,7 +48,7 @@ const Home = () => {
 const Detail = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="DetailRecipe" component={DetailRecipe} options={{ headerShown: false }} />
+      <Stack.Screen name="Detail" component={DetailRecipe} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }
