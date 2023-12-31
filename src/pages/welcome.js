@@ -14,7 +14,7 @@ export default function Welcome() {
         navigation.navigate('Register')
     }
     const toHome = () => {
-
+        navigation.navigate('Home')
     }
     return (
 
