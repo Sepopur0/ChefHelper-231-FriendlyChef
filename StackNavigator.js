@@ -7,7 +7,7 @@ import Onboarding from "./src/pages/onboarding";
 import HomePage from "./src/pages/home";
 import RecipeByCategoryPage from './src/pages/recipeByCategory'
 import HelpPage from "./src/pages/help";
-import DetailRecipe from "./src/pages/detail-recipe";
+import DetailRecipe from "./src/pages/detailRecipe";
 const Stack = createStackNavigator()
 
 const Authencitation = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, SafeAreaView, StatusBar, Text, Image } from "react-native";
-import { RecipeDetailStyle } from "../style/detail-recipe-style.js";
+import { RecipeDetailStyle } from "../style/detailRecipeStyle.js";
 import useCategories from "../services/recipe/fetchAllCategories.js";
 import useRecipes from "../services/recipe/getRecipeList.js";
 import RecipeGuide from "../components/recipe-guide.jsx";
