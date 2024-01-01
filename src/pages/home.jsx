@@ -9,6 +9,7 @@ import CommonTopBarNavigator from "../components/topBarNavigator";
 import RecipeCard from "../components/recipeCard";
 import HomeSearchBar from "../components/searchBar";
 import BottomNavigator from "../components/bottomNavigator";
+import RecipeDetail from "./detailRecipe";
 
 export default function HomePage() {
   const [pageName, setPageName] = useState('Home');
@@ -28,6 +29,10 @@ export default function HomePage() {
   const toRecipesByCategory = (id, name, isCommon) => {
     navigation.navigate("RecipeByCategory", { id: id, name: name });
   }
+
+  // const handleImageClick = (recipeId) => {
+  //   console.log("Image clicked for recipe ID:", recipeId);
+  // };
 
   //Hard code until i find out how to fix bug
   const categoryData = [
@@ -82,9 +87,7 @@ export default function HomePage() {
   ]
   // const { data: categoryData, error: categoryError, isLoading: categoryIsLoading } = useCategories();
   const { data: popularRecipes, error: popularRecipeError, isLoading: popularRecipeIsLoading } = useRecipes(null, 8);
-
-  const { data: searchedRecipes, error: searchedRecipeError, isLoading: searchedRecipesIsLoading } = useRecipes(null, null, searchPhrase); 
-
+  const { data: searchedRecipes, error: searchedRecipeError, isLoading: searchedRecipesIsLoading } = useRecipes(null, null, searchPhrase);
   const recipeByCategory = categoryData.map((category) => {
     const { data: recipes, error: recipeError, isLoading: recipeIsLoading } = useRecipes(null, category.id);
     return {
@@ -94,50 +97,53 @@ export default function HomePage() {
       recipeIsLoading,
     };
   })
-  
+
   const recipeByCategoryIsLoading = recipeByCategory.some(item => item.recipeIsLoading);
 
-  if(searchPhrase != ""){
-    if(searchedRecipesIsLoading) {
+  if (searchPhrase !== "") {
+    if (searchedRecipesIsLoading) {
       return (
         <SafeAreaView style={HomeStyle.container}>
-          <StatusBar style={HomeStyle.statusBar}/>
+          <StatusBar style={HomeStyle.statusBar} />
           <Text style={HomeStyle.categoryText}>Loading...</Text>
         </SafeAreaView>
       );
     }
+
     return (
       <SafeAreaView style={HomeStyle.container}>
-      <StatusBar style={HomeStyle.statusBar}/>
-      <CommonTopBarNavigator pageName={pageName}/>
-      <HomeSearchBar
-        searchPhrase={searchText}
-        setSearchPhrase={handleSearchTextChange}
-        searchButtonClick={handleSearchButtonClick}
-      />
-      
-      <View>
-      {Array.isArray(searchedRecipes.data) && searchedRecipes.data.length == 0 && <Text style={HomeStyle.searchNotFoundText}>
-        There is no recipes that match your keyword, try another one
-      </Text>}
-      </View>
-    
+        <StatusBar style={HomeStyle.statusBar} />
+        <CommonTopBarNavigator pageName={pageName} />
+        <HomeSearchBar
+          searchPhrase={searchText}
+          setSearchPhrase={handleSearchTextChange}
+          searchButtonClick={handleSearchButtonClick}
+        />
 
-      <ScrollView>
-        {Array.isArray(searchedRecipes.data) && searchedRecipes.data.length > 0 && searchedRecipes.data.map((recipe) => 
-          <View style={HomeStyle.recipeByCategoryContainer}>
-            <RecipeCard recipe={recipe} key={recipe.id}/>
-          </View>
-        )}
-      </ScrollView>
-      <BottomNavigator buttonIndex={1}/>
-    </SafeAreaView>
-    )
+        <View>
+          {Array.isArray(searchedRecipes.data) && searchedRecipes.data.length === 0 && <Text style={HomeStyle.searchNotFoundText}>
+            There is no recipes that match your keyword, try another one
+          </Text>}
+        </View>
+
+        <ScrollView>
+          {Array.isArray(searchedRecipes.data) && searchedRecipes.data.length > 0 && searchedRecipes.data.map((recipe) =>
+            <View style={HomeStyle.recipeByCategoryContainer} key={recipe.id}>
+              <TouchableOpacity onPress={() => toRecipeDetail(recipe.id)}>
+                <RecipeCard recipe={recipe} />
+              </TouchableOpacity>
+            </View>
+          )}
+        </ScrollView>
+        <BottomNavigator buttonIndex={1} />
+      </SafeAreaView>
+    );
   }
+
   if (popularRecipeIsLoading || recipeByCategoryIsLoading) {
     return (
       <SafeAreaView style={HomeStyle.container}>
-        <StatusBar style={HomeStyle.statusBar}/>
+        <StatusBar style={HomeStyle.statusBar} />
         <Text style={HomeStyle.categoryText}>Loading...</Text>
       </SafeAreaView>
     );
@@ -145,8 +151,8 @@ export default function HomePage() {
 
   return (
     <SafeAreaView style={HomeStyle.container}>
-      <StatusBar style={HomeStyle.statusBar}/>
-      <CommonTopBarNavigator pageName={pageName}/>
+      <StatusBar style={HomeStyle.statusBar} />
+      <CommonTopBarNavigator pageName={pageName} />
       <HomeSearchBar
         searchPhrase={searchText}
         setSearchPhrase={handleSearchTextChange}
@@ -155,26 +161,28 @@ export default function HomePage() {
 
       <ScrollView>
         {popularRecipes.data && popularRecipes.data?.length > 0 && (
-          <View style={HomeStyle.recipeByCategoryContainer}>
-            <TouchableOpacity onPress={()=>toRecipesByCategory(null, null, true)}>
-              <Text style={HomeStyle.categoryText}>Popular</Text>
-              </TouchableOpacity>
-            <RecipeCard recipe={popularRecipes.data[0]}/>
+          <View style={HomeStyle.recipeByCategoryContainer} key={popularRecipes.data[0].id}>
+            <Text style={HomeStyle.categoryText}>Popular</Text>
+            <RecipeCard 
+              recipe={popularRecipes.data[0]}
+            />
           </View>
         )}
 
-        {Array.isArray(recipeByCategory) && recipeByCategory.map(({ category, recipeIsLoading, recipes }) => (
-          !recipeIsLoading && recipes.data.length !== 0 && (
-            <View key={category.id} style={HomeStyle.recipeByCategoryContainer}>
-              <TouchableOpacity onPress={()=>toRecipesByCategory(category.id, category.name, false)}>
-              <Text style={HomeStyle.categoryText}>{category.name}</Text>
-              </TouchableOpacity>
-              {category.id && <RecipeCard recipe={recipes.data[0]}/>}
-            </View>
-          )
-        ))}
+        {Array.isArray(recipeByCategory) &&
+          recipeByCategory.map(({ category, recipeIsLoading, recipes }) => (
+            !recipeIsLoading &&
+            recipes.data.length !== 0 && (
+              <View key={category.id} style={HomeStyle.recipeByCategoryContainer}>
+                  <Text style={HomeStyle.categoryText}>{category.name}</Text>
+                  {category.id && <RecipeCard 
+                    recipe={recipes.data[0]} 
+                  />}
+              </View>
+            )
+          ))}
       </ScrollView>
-      <BottomNavigator buttonIndex={1}/>
+      <BottomNavigator buttonIndex={1} />
     </SafeAreaView>
   );
 }

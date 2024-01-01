@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import { View, SafeAreaView, StatusBar, Text, Image } from "react-native";
+import React from "react";
+import { useRoute } from '@react-navigation/native';
+import { View, SafeAreaView, StatusBar, Text, Image, ScrollView } from "react-native";
 import { RecipeDetailStyle } from "../style/detailRecipeStyle.js";
-import useCategories from "../services/recipe/fetchAllCategories.js";
-import useRecipes from "../services/recipe/getRecipeList.js";
 import RecipeGuide from "../components/recipe-guide.jsx";
 import BackTopBarNavigator from "../components/backTopBarNavigator.jsx";
+import useRecipeById from "../services/recipe/getRecipeById.js";
+import RecipeCard from "../components/recipeCard.jsx";
 
-export default function DetailRecipe() {
-  // const [pageName, setPageName] = useState('detail');
-  const { data: categoryData, error: categoryError, isLoading: categoryIsLoading } = useCategories();
-  const { data: popularRecipes, error: popularRecipeError, isLoading: popularRecipeIsLoading } = useRecipes(null, 8);
+const RecipeDetail = () => {
 
-  if (categoryIsLoading || popularRecipeIsLoading) {
-    // Render a loading spinner or some indication that data is loading
+  const { data: recipe, error, isLoading } = useRecipeById(10);
+  
+  if (isLoading) {
     return (
       <SafeAreaView style={RecipeDetailStyle.container}>
         <StatusBar style={RecipeDetailStyle.statusBar} />
@@ -21,30 +20,44 @@ export default function DetailRecipe() {
     );
   }
 
-  const categories = categoryData.data;
-  console.log({ categories });
-  console.log('popularRecipes:', popularRecipes);
-  console.log(popularRecipes.data, popularRecipes.data?.length > 0);
-  console.log("Guide", popularRecipes.data[0].guide)
+  if (error) {
+    return (
+      <SafeAreaView style={RecipeDetailStyle.container}>
+        <StatusBar style={RecipeDetailStyle.statusBar} />
+        <Text style={RecipeDetailStyle.categoryText}>Error loading data: {error.message}</Text>
+      </SafeAreaView>
+    );
+  }
+
+  if (!recipe) {
+    return (
+      <SafeAreaView style={RecipeDetailStyle.container}>
+        <StatusBar style={RecipeDetailStyle.statusBar} />
+        <Text style={RecipeDetailStyle.categoryText}>No recipe data available.</Text>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={RecipeDetailStyle.container}>
-      <StatusBar style={RecipeDetailStyle.statusBar} />
-      <BackTopBarNavigator pageName={popularRecipes?.data[0].name} />
+      <ScrollView style={RecipeDetailStyle.contentContainer}>
+        <StatusBar style={RecipeDetailStyle.statusBar} />
+        <BackTopBarNavigator pageName={recipe.name} />
 
-      {/* Render content when popular recipes are available */}
-      {popularRecipes.data && popularRecipes.data?.length > 0 && (
         <View style={RecipeDetailStyle.recipeByCategoryContainer}>
-          <Text style={RecipeDetailStyle.categoryText}>{popularRecipes?.data[0].description}</Text>
-          <Text style={RecipeDetailStyle.timeText}> {popularRecipes?.data[0].time} minutes</Text>
+          <Text style={RecipeDetailStyle.categoryText}>{recipe.description}</Text>
+          <Text style={RecipeDetailStyle.timeText}> {recipe.time} minutes</Text>
+          <Text style={RecipeDetailStyle.calorieText}> {recipe.calorie} calories</Text>
           <Image
             style={RecipeDetailStyle.image}
-            source={{ uri: popularRecipes?.data[0].images[0] }}
+            source={{ uri: recipe.images[0] }}
           />
+          <RecipeGuide guide={recipe.guide} />
+        </View>
 
-          <RecipeGuide guide={popularRecipes.data[0].guide} />
-        </View>)
-
-      }
+      </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default RecipeDetail;

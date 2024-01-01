@@ -7,7 +7,7 @@ import Onboarding from "./src/pages/onboarding";
 import HomePage from "./src/pages/home";
 import RecipeByCategoryPage from './src/pages/recipeByCategory'
 import HelpPage from "./src/pages/help";
-import DetailRecipe from "./src/pages/detailRecipe";
+import RecipeDetail from "./src/pages/detailRecipe";
 const Stack = createStackNavigator()
 
 const Authencitation = () => {
@@ -48,7 +48,7 @@ const Home = () => {
 const Detail = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Detail" component={DetailRecipe} options={{ headerShown: false }} />
+      <Stack.Screen name="RecipeDetail" component={RecipeDetail} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

@@ -1,4 +1,4 @@
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet } from "react-native";
 import { colorPalette } from "../utils/systemDesign";
 
 export const RecipeGuideStyle = StyleSheet.create({
@@ -8,8 +8,8 @@ export const RecipeGuideStyle = StyleSheet.create({
   },
   recipeNameText: {
     color: colorPalette.color4,
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: "bold",
   },
   normalText: {
     color: colorPalette.color4,
@@ -17,15 +17,13 @@ export const RecipeGuideStyle = StyleSheet.create({
   },
   smallText: {
     color: colorPalette.color4,
-    fontSize: 13,
+    fontSize: 12,
   },
   image: {
-    width: '100%',
-    // borderTopLeftRadius: 20,
-    // borderTopRightRadius: 20,
+    width: "100%",
     borderRadius: 20,
-    height: 200,
-    resizeMode: 'stretch',
+    borderRadius: 20,
+    resizeMode: "stretch",
   },
   stepText: {
     color: colorPalette.color4,
@@ -35,13 +33,12 @@ export const RecipeGuideStyle = StyleSheet.create({
   },
   leftBorder: {
     width: 1,
-    // height: 230,
-    flex: 1,
+    height: 100, // Set height to "auto" for dynamic height
     borderRadius: 1,
     borderWidth: 1,
     borderColor: colorPalette.color4,
     borderStyle: "dashed",
-    marginTop: -15
+    marginTop: -15,
   },
   stepContainer: {
     flexDirection: "row",
@@ -49,7 +46,6 @@ export const RecipeGuideStyle = StyleSheet.create({
     marginTop: 10,
   },
   content: {
-    flex: 1,
     marginLeft: 10,
   },
   dot: {
@@ -58,6 +54,6 @@ export const RecipeGuideStyle = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: colorPalette.color4,
     marginTop: 5,
-    marginLeft: -4
+    marginLeft: -4,
   },
 });

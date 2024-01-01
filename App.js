@@ -9,7 +9,6 @@ import HomePage from './src/pages/home';
 import SettingPage from './src/pages/setting';
 import { useState, useEffect } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage"; 
-import HelpPage from './src/pages/help';
 
 const queryClient = new QueryClient();
 const Stack = createStackNavigator();
@@ -43,6 +42,7 @@ export default function App() {
               <Stack.Screen name="Help" component={HelpNavigator} options={{ headerShown: false }} />
               <Stack.Screen name="Setting" component={SettingPage} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeByCategory" component={RecipeByCategoryPage} options={{headerShown:false}}/>
+              <Stack.Screen name="RecipeDetail" component={Detail} options={{ headerShown: false }} />
             </>
           ) : (
             <>
@@ -52,7 +52,7 @@ export default function App() {
               <Stack.Screen name="Help" component={HelpNavigator} options={{ headerShown: false }} />
               <Stack.Screen name="Setting" component={SettingPage} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeByCategory" component={RecipeByCategoryPage} options={{headerShown:false}}/>
-              <Stack.Screen name="DetailRecipe" component={Detail} options={{ headerShown: false }} />
+              <Stack.Screen name="RecipeDetail" component={Detail} options={{ headerShown: false }} />
             </>
           )}
         </Stack.Navigator>

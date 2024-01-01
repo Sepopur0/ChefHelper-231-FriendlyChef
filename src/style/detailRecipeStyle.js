@@ -1,52 +1,57 @@
 import { StyleSheet, StatusBar } from "react-native";
 import { colorPalette } from "../utils/systemDesign";
 import { Dimensions } from "react-native";
+
 export const RecipeDetailStyle = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
-    paddingTop: 30,
-    paddingHorizontal: 20,
+    justifyContent: 'space-between',
     backgroundColor: colorPalette.color13,
   },
   recipeByCategoryContainer: {
-    width: '100%',  // Set width to '100%' to match the parent's width
+    width: '100%',
     height: 'auto',
-    alignItems: 'left',
     backgroundColor: colorPalette.color13,
   },
   statusBar: {
     animated: true,
     backgroundColor: colorPalette.color13,
     barStyle: 'light-content',
-    showHideTransition: 'slide'
+    showHideTransition: 'slide',
+  },
+  contentContainer: {
+    width: "100%",
+    paddingTop: 8,
+    marginHorizontal: 36,
   },
   bgimg: {
     position: 'absolute',
     top: 0,
     right: 0,
     bottom: 0,
-    left: 0
+    left: 0,
   },
   categoryText: {
     marginVertical: 10,
     fontSize: 14,
+    fontWeight: "600",
+    textAlign: 'center',
     color: colorPalette.color4,
-    fontWeight: '300',
   },
   timeText: {
     marginVertical: 10,
     color: "#FBBC05",
     fontWeight: 'bold',
-    textAlign: "right"
+    textAlign: "right",
   },
   image: {
     width: '100%',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderRadius: 20,
     height: 200,
     resizeMode: 'stretch',
   },
-})
+});

@@ -12,7 +12,7 @@ import {
 } from "accordion-collapse-react-native";
 const RecipeGuide = ({ guide }) => {
   return (
-    <ScrollView contentContainerStyle={{ paddingBottom: 400 }}>
+    <ScrollView contentContainerStyle={{ paddingBottom: 0 }}>
       {guide.map((item, index) => {
         console.log({ item });
         return (
