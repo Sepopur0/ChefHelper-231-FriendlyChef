@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigation,CommonActions } from "@react-navigation/native";
 import slides from "../components/slides";
 import CommonButton from "../components/button";
+import AsyncStorage from "@react-native-async-storage/async-storage"; 
+
 export default function Onboarding() {
   const navigation = useNavigation();
   const [completed, setCompleted] = useState(false);
@@ -14,11 +16,13 @@ export default function Onboarding() {
     scrollX.addListener(({ value }) => {
       if (Math.floor(value / Dimensions.get('window').width) === slides.length - 1) {
         setCompleted(true);
+        AsyncStorage.setItem('onboarding_completed', 'true')
       }
     })
     return () => scrollX.removeListener();
   }, [])
   const toWelcome=()=>{
+    AsyncStorage.setItem('onboarding_completed', 'true')
     navigation.dispatch(
       CommonActions.reset({
         index: 0,
