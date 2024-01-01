@@ -5,7 +5,6 @@ import RegisterPage from "./src/pages/register";
 import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
 import HomePage from "./src/pages/home";
-import RecipeByCategoryPage from './src/pages/recipeByCategory'
 import HelpPage from "./src/pages/help";
 import RecipeDetail from "./src/pages/detailRecipe";
 import ManageAccountPage from './src/pages/manageAccount';
@@ -79,7 +78,6 @@ const ScanIngredient = () => {
 }
 export {
   Authencitation,
-  Onboard,
   Home,
   Detail,
   HelpNavigator,

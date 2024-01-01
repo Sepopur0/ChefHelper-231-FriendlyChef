@@ -26,11 +26,8 @@
     "react-native": "0.72.6",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-paper": "^5.11.4",
-<<<<<<< HEAD
     "react-native-collapsible": "^1.6.1",
-=======
     "react-native-reanimated": "~3.3.0",
->>>>>>> e40ac7ee77e985fe1ee7cd713bb7cb6eee888440
     "react-native-status-bar-height": "^2.6.0",
     "react-query": "^3.39.3"
   },
