@@ -13,9 +13,10 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }} />
-          <Stack.Screen name="Authencitation" component={Authencitation} options={{ headerShown: false }} />
-          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+          {/* <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }} /> */}
+          {/* <Stack.Screen name="Authencitation" component={Authencitation} options={{ headerShown: false }} />
+          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} /> */}
+          {/* <Stack.Screen name="HelpPage" component={HelpNavigator} options={{ headerShown: false }} /> */}
           <Stack.Screen name="DetailRecipe" component={Detail} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
