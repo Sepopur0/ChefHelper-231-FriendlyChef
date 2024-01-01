@@ -56,5 +56,6 @@ export {
   Authencitation,
   Onboard,
   Home,
-  Detail
+  Detail,
+  HelpNavigator
 }

@@ -1,5 +1,5 @@
-import useCategory from "../services/recipe/get-category-by-id";
-import useCategories from "../services/recipe/fetch-all-category";
+import useCategory from "../services/recipe/getCategoryById";
+import useCategories from "../services/recipe/fetchAllCategories";
 import { colorPalette } from "../utils/systemDesign";
 import { RecipeGuideStyle } from "../style/recipy-guide";
 import { View, Text, Image, ScrollView } from "react-native";

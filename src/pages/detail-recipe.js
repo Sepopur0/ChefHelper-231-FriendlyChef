@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { View, SafeAreaView, StatusBar, Text, Image } from "react-native";
 import { RecipeDetailStyle } from "../style/detail-recipe-style.js";
-import useCategories from "../services/recipe/fetch-all-category.js";
-import useRecipes from "../services/recipe/get-recipe-list.js";
+import useCategories from "../services/recipe/fetchAllCategories.js";
+import useRecipes from "../services/recipe/getRecipeList.js";
 import RecipeGuide from "../components/recipe-guide.jsx";
-import CommonTopBarNavigator from "../components/top-bar-navigator.jsx";
+import BackTopBarNavigator from "../components/backTopBarNavigator.jsx";
 
 export default function DetailRecipe() {
   // const [pageName, setPageName] = useState('detail');
@@ -29,7 +29,7 @@ export default function DetailRecipe() {
   return (
     <SafeAreaView style={RecipeDetailStyle.container}>
       <StatusBar style={RecipeDetailStyle.statusBar} />
-      <CommonTopBarNavigator pageName={popularRecipes?.data[0].name} />
+      <BackTopBarNavigator pageName={popularRecipes?.data[0].name} />
 
       {/* Render content when popular recipes are available */}
       {popularRecipes.data && popularRecipes.data?.length > 0 && (
