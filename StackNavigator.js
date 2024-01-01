@@ -6,6 +6,10 @@ import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
 import ManageAccountPage from './src/pages/manageAccount';
 import SettingPage from './src/pages/setting';
+import ScanPage from './src/pages/scan';
+import SelectIngredientPage from './src/pages/selectIngredientPage';
+import RecipeByCategoryPage from './src/pages/recipeByScan';
+import recipeByScan from "./src/pages/recipeByScan";
 const Stack = createStackNavigator()
 
 const Authencitation = () => {
@@ -33,8 +37,19 @@ const Setting = () => {
         </Stack.Navigator>
     )
 }
+
+const ScanIngredient = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="ScanPage" component={ScanPage} options={{headerShown: false}} />
+            <Stack.Screen name="SelectIngredient" component={SelectIngredientPage} options={{headerShown: false}} />
+            <Stack.Screen name="RecipeByScan" component={recipeByScan} options={{headerShown: false}} />
+        </Stack.Navigator>
+    )
+}
 export {
     Authencitation,
     Onboard,
     Setting,
+    ScanIngredient,
 }
