@@ -6,6 +6,7 @@ import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
 import HomePage from "./src/pages/home";
 import RecipeByCategoryPage from './src/pages/recipeByCategory'
+import HelpPage from "./src/pages/help";
 const Stack = createStackNavigator()
 
 const Authencitation = () => {
@@ -17,6 +18,7 @@ const Authencitation = () => {
         </Stack.Navigator>
     )
 }
+
 const Onboard = () => {
     return (
         <Stack.Navigator>
@@ -24,7 +26,17 @@ const Onboard = () => {
         </Stack.Navigator>
     )
 }
+
+const HelpNavigator = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Help" component={HelpPage} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    );
+  };
+
 export {
     Authencitation,
     Onboard,
+    HelpNavigator,
 }

@@ -7,7 +7,7 @@ function CommonTopBarNavigator({ pageName }) {
   const navigation = useNavigation();
   const toHelp = () => {
     //Navigate to help page
-    navigation.navigate('Login')
+    navigation.navigate('Help');
   }
   const toSetting = () => {
     //Navigate to setting page
