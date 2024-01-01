@@ -23,7 +23,6 @@ export default function HomePage() {
   const handleSearchButtonClick = () => {
     //Call api using searchPhrase
     setSearchPhrase(searchText);
-    console.log("Search button clicked")
   }
   
   const toRecipesByCategory = (id, name, isCommon) => {
