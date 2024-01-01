@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     // flex: 1,
     width: "100%", // Ensure full width
-    paddingTop: 16,
+    paddingTop: 8,
     marginHorizontal: 36,
   },
   sectionTitle: {
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   feedbackText: {
     fontSize: 16,
-    marginVertical: 12,
+    marginVertical: 8,
     color: colorPalette.color4,
   },
   feedbackButton: {
@@ -83,12 +83,6 @@ const styles = StyleSheet.create({
     color: colorPalette.color4,
     fontSize: 16,
     textAlign: "center",
-  },
-  arrowIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 8,
-    color: colorPalette.color12,
   },
   backIcons: { 
     left: 30,
@@ -156,11 +150,10 @@ export default function HelpPage() {
 
   return (
     <SafeAreaView style={styles.container}>
-
-      <View style={{width:'100%'}}>
+      <View style={{ width: '100%' }}>
         <CommonButton width="20%" containerStyle={{}} style={styles.backButton} action={goBack}>
           <MaterialCommunityIcons name="chevron-left" size={24} style={styles.backIcons} />
-          <Text style={{color:colorPalette.color2, fontSize:12, top: 5, marginLeft: 26}}>Back</Text>
+          <Text style={{ color: colorPalette.color2, fontSize: 12, top: 5, marginLeft: 26 }}>Back</Text>
         </CommonButton>
       </View>
 
@@ -172,24 +165,20 @@ export default function HelpPage() {
         {faqData.map((faq, index) => (
           <View key={index}>
             <TouchableOpacity onPress={() => toggleQuestion(index)}>
-              <Text style={[styles.toggleText, showQuestions[index] ? { color: "gold" } : null]}>
+              <Text style={[styles.toggleText, showQuestions[index] ? { color: "gold", marginBottom: 0 } : null]}>
                 {faq.question}
               </Text>
-              <Image
-                source={showQuestions[index]}
-                style={styles.arrowIcon}
-              />
             </TouchableOpacity>
 
             {showQuestions[index] && (
-              <View style={styles.answerContainer}>
+              <View style={[styles.answerContainer, showQuestions[index] ? null : { marginBottom: 0, paddingBottom: 0 }]}>
                 {Array.isArray(faq.answer) ? (
                   faq.answer.map((step, stepIndex) => (
-                    <View key={stepIndex} style={{ marginBottom: 16 }}>
+                    <View key={stepIndex} style={{ marginBottom: 8 }}>
                       <Text style={styles.answer}>
-                        <Text style={{ fontWeight: 'bold' }}>{step.step}:</Text>
+                        <Text style={{ fontWeight: 'bold', marginBottom: 0 }}>{step.step}:</Text>
                       </Text>
-                      <Text style={[styles.answer, { textAlign: 'justify', marginBottom: 10 }]}>{step.description}</Text>
+                      <Text style={[styles.answer, { textAlign: 'justify', marginBottom: 8 }]}>{step.description}</Text>
                       {step.image && (
                         <View style={styles.imageContainer}>
                           <Image source={step.image} style={styles.image} />
