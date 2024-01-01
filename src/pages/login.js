@@ -7,21 +7,55 @@ import { useNavigation } from "@react-navigation/native";
 import { welcomeStyle } from "../style/welcomeStyle";
 // import { LoginRegisterBackGround } from "../components/linearGradients";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import useLogin from "../services/auth/login";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function LoginPage() {
     const navigation = useNavigation();
 
     //get input from text
     const [email,changeEmail]=useState('');
     const [password,changePassword]=useState('');
+    //data for calling login api
+    const [emailInput,setEmailInput]=useState('');
+    const [passwordInput,setPasswordInput]=useState('');
     //display input error
     const [error,changeError]=useState('');
+    const { isLoading, isError, data: loginData, error: loginError } = useLogin(emailInput, passwordInput);
     
     const loginWithGoogle = () => {
 
     }
-    const login = () => {
+    const login = async () => {
+        changeError('');
+    
+        // Validate email and password
+        if (email.trim() === '') {
+            changeError('Email field is left empty');
+        } else if (password.trim() === '') {
+            changeError('Password field is left empty');
+        }else{
+            try{
+                setEmailInput(email);
+                setPasswordInput(password);
 
-    }
+                if(isError){
+                    changeError('Invalid email or password');
+                }
+                else if (!isError && !isLoading) {
+                    const accessToken = loginData?.data?.accessToken;
+        
+                    if (accessToken) {
+                        await AsyncStorage.setItem('accessToken', accessToken);
+                        navigation.navigate('Home');
+                    }
+                }
+            } catch (error) {
+                changeError('An unexpected error occurred');
+            }
+        }
+    };
+    
+    
     const toRegister = () => {
         navigation.navigate('Register')
     }
@@ -42,7 +76,7 @@ export default function LoginPage() {
                         </CommonButton>
                     </View>
                     <Text style={welcomeStyle.titletext}>Sign In</Text>
-                    <Text style={welcomeStyle.smalltext}>{error}</Text>
+                    <Text style={[welcomeStyle.smalltext, {color: 'red'}]}>{error}</Text>
                     <Text style={welcomeStyle.smallText}>Enter your email</Text>
                     <CommonTextInput placeholder={"Your email"} type="cancelable" value={email} onChangeText={(e)=>{changeEmail(e)}}/>
 
