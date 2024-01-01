@@ -4,7 +4,7 @@ import { colorPalette } from "../utils/systemDesign";
 export const RecipeGuideStyle = StyleSheet.create({
   container: {
     padding: 10,
-    maxHeight: "100%"
+    // maxHeight: "100%"
   },
   recipeNameText: {
     color: colorPalette.color4,

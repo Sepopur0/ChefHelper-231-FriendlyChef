@@ -12,7 +12,7 @@ import {
 } from "accordion-collapse-react-native";
 const RecipeGuide = ({ guide }) => {
   return (
-    <ScrollView style={RecipeGuideStyle.container}>
+    <ScrollView contentContainerStyle={{ paddingBottom: 400 }}>
       {guide.map((item, index) => {
         console.log({ item });
         return (
@@ -35,7 +35,7 @@ const RecipeGuide = ({ guide }) => {
                   </Text>
                   <Image
                     style={RecipeGuideStyle.image}
-                    source={{ uri: item.image }}
+                    source={{ uri: item.images }}
                   />
                 </View>
               </View>
