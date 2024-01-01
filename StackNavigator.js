@@ -8,6 +8,12 @@ import HomePage from "./src/pages/home";
 import RecipeByCategoryPage from './src/pages/recipeByCategory'
 import HelpPage from "./src/pages/help";
 import RecipeDetail from "./src/pages/detailRecipe";
+import ManageAccountPage from './src/pages/manageAccount';
+import SettingPage from './src/pages/setting';
+import ScanPage from './src/pages/scan';
+import SelectIngredientPage from './src/pages/selectIngredientPage';
+import RecipeByCategoryPage from './src/pages/recipeByScan';
+import recipeByScan from "./src/pages/recipeByScan";
 const Stack = createStackNavigator()
 
 const Authencitation = () => {
@@ -52,10 +58,32 @@ const Detail = () => {
     </Stack.Navigator>
   )
 }
+
+const Setting = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="SettingPage" component={SettingPage} options={{ headerShown: false }} />
+            <Stack.Screen name="ManageAccount" component={ManageAccountPage} options={{ headerShown: false}} />
+        </Stack.Navigator>
+    )
+}
+
+const ScanIngredient = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="ScanPage" component={ScanPage} options={{headerShown: false}} />
+            <Stack.Screen name="SelectIngredient" component={SelectIngredientPage} options={{headerShown: false}} />
+            <Stack.Screen name="RecipeByScan" component={recipeByScan} options={{headerShown: false}} />
+        </Stack.Navigator>
+    )
+}
 export {
   Authencitation,
   Onboard,
   Home,
   Detail,
-  HelpNavigator
+  HelpNavigator,
+    Onboard,
+    Setting,
+    ScanIngredient,
 }

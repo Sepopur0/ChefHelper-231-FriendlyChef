@@ -2,11 +2,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Authencitation as Authencitation, Home, HelpNavigator, Detail } from './StackNavigator';
+import { Authencitation as Authencitation, Setting, ScanIngredient, HelpNavigator, Detail } from './StackNavigator';
 import { Onboard } from './StackNavigator';
 import RecipeByCategoryPage from './src/pages/recipeByCategory';
 import HomePage from './src/pages/home';
-import SettingPage from './src/pages/setting';
 import { useState, useEffect } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage"; 
 
@@ -39,8 +38,9 @@ export default function App() {
             <>
               <Stack.Screen name="Authencitation" component={Authencitation} options={{ headerShown: false }} />
               <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
+              <Stack.Screen name="ScanIngredient" component={ScanIngredient} options={{ headerShown: false }} />
               <Stack.Screen name="Help" component={HelpNavigator} options={{ headerShown: false }} />
-              <Stack.Screen name="Setting" component={SettingPage} options={{ headerShown: false }} />
+              <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeByCategory" component={RecipeByCategoryPage} options={{headerShown:false}}/>
               <Stack.Screen name="RecipeDetail" component={Detail} options={{ headerShown: false }} />
             </>
@@ -49,8 +49,9 @@ export default function App() {
               <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }} />
               <Stack.Screen name="Authencitation" component={Authencitation} options={{ headerShown: false }} />
               <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
+              <Stack.Screen name="ScanIngredient" component={ScanIngredient} options={{ headerShown: false }} />
               <Stack.Screen name="Help" component={HelpNavigator} options={{ headerShown: false }} />
-              <Stack.Screen name="Setting" component={SettingPage} options={{ headerShown: false }} />
+              <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeByCategory" component={RecipeByCategoryPage} options={{headerShown:false}}/>
               <Stack.Screen name="RecipeDetail" component={Detail} options={{ headerShown: false }} />
             </>

@@ -10,16 +10,19 @@ export default BottomNavigator = ({buttonIndex}) => {
   const toProfile = () => {
     //
   }
+  const toScan = () => {
+    navigation.navigate('ScanIngredient')
+  }
   return(
     <SafeAreaView style={BottomNavigatorStyle.container}>
       <TouchableOpacity style={BottomNavigatorStyle.image1} onPress={toHome}>
         <Image
           style={BottomNavigatorStyle.image}
-          source={buttonIndex==1?require('../../assets/yellow-home.png'):require('../../assets/yellow-home.png')}
+          source={buttonIndex==1?require('../../assets/yellow-home.png'):require('../../assets/home-button-white.png')}
         />
       </TouchableOpacity>
       <View style={BottomNavigatorStyle.image2}>
-        <TouchableOpacity style={BottomNavigatorStyle.image2Container}>
+        <TouchableOpacity style={BottomNavigatorStyle.image2Container} onPress={toScan}>
           <Image
             style={BottomNavigatorStyle.mediumImage}
             source={require('../../assets/scan-button.png')}
