@@ -4,8 +4,8 @@ import LoginPage from "./src/pages/login";
 import RegisterPage from "./src/pages/register";
 import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
-import HomePage from "./src/pages/home";
-import RecipeByCategoryPage from './src/pages/recipeByCategory'
+import ManageAccountPage from './src/pages/manageAccount';
+import SettingPage from './src/pages/setting';
 const Stack = createStackNavigator()
 
 const Authencitation = () => {
@@ -24,7 +24,17 @@ const Onboard = () => {
         </Stack.Navigator>
     )
 }
+
+const Setting = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="SettingPage" component={SettingPage} options={{ headerShown: false }} />
+            <Stack.Screen name="ManageAccount" component={ManageAccountPage} options={{ headerShown: false}} />
+        </Stack.Navigator>
+    )
+}
 export {
     Authencitation,
     Onboard,
+    Setting,
 }

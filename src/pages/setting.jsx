@@ -1,11 +1,10 @@
 import BackTopBarNavigator from "../components/backTopBarNavigator";
 import { SettingStyle } from "../style/settingStyle";
-import { View, SafeAreaView, StatusBar, Text, Image, Button, TouchableOpacity } from "react-native";
+import { SafeAreaView, StatusBar, Text, Image, TouchableOpacity } from "react-native";
 import { useState, useEffect } from 'react';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import useProfile from "../services/auth/profile";
-import { colorPalette } from "../utils/systemDesign";
 
 export default SettingPage = () => {
   const navigation = useNavigation();
@@ -43,6 +42,13 @@ export default SettingPage = () => {
     }
   }, [isLogin, profileData]);
   
+  const toManageAccount = () => {
+    if(!isLogin){
+      navigation.navigate('Login')
+    }else{
+      navigation.navigate('ManageAccount', { accessToken: accessToken })
+    }
+  }
   const toHelp = () => {
     //Navigate to help page
   }
@@ -66,7 +72,7 @@ export default SettingPage = () => {
         <SafeAreaView style={SettingStyle.subTitleContainer}>
           <Text style={SettingStyle.subTitle}>Account</Text>
         </SafeAreaView>
-        <SafeAreaView style={SettingStyle.rowContainer}>
+        <TouchableOpacity style={SettingStyle.rowContainer} onPress={toManageAccount}>
           <SafeAreaView style={SettingStyle.leftRowContainer}>
           <Image
             source={isLogin?{uri:avatar}:require('./../../assets/default-avatar.jpg')}
@@ -76,7 +82,7 @@ export default SettingPage = () => {
           <SafeAreaView style={SettingStyle.rightRowContainer}>
           <Text style={SettingStyle.nameText}>{name}</Text>
           </SafeAreaView>
-        </SafeAreaView>
+        </TouchableOpacity>
       </SafeAreaView>
       <SafeAreaView style={SettingStyle.subContainer}>
         <SafeAreaView style={SettingStyle.subTitleContainer}>
