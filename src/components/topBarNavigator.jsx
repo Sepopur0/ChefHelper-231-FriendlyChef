@@ -11,7 +11,7 @@ function CommonTopBarNavigator({ pageName }) {
   }
   const toSetting = () => {
     //Navigate to setting page
-    navigation.navigate('Login')
+    navigation.navigate('Setting')
   }
   return (
     <View style={TopBarNavigationStyle.container}>

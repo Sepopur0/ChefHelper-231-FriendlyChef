@@ -25,7 +25,6 @@ export default RecipeByCategoryPage = ({route}) => {
   const handleSearchButtonClick = () => {
     //Call api using searchPhrase
     setSearchPhrase(searchText);
-    console.log("Search button clicked")
   }
 
   if(searchPhrase != ""){

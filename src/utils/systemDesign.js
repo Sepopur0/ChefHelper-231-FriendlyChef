@@ -12,5 +12,6 @@ const colorPalette={
     color11:'#E47B06',
     color12:'#1C0E0D',
     color13:'#000000',
+    color14:'#1B1B1C',
 }
 export {colorPalette}

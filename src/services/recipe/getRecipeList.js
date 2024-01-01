@@ -14,7 +14,6 @@ const fetchRecipes = async (isCommon, categoryId, searchPhrase) => {
   if (typeof searchPhrase === 'string' && searchPhrase != '') {
     params.search = searchPhrase;
   }
-  console.log('Params: ',params);
   try { 
     const response = await axios.get(`${BACKEND_API_PREFIX}recipe`, {
       params: params,
