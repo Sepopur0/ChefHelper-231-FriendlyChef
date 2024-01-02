@@ -43,7 +43,7 @@ export default function App() {
             </>
           ) : (
             <>
-              <Stack.Screen name="Upload" component={Upload} options={{ headerShown: false }} />
+              {/* <Stack.Screen name="Upload" component={Upload} options={{ headerShown: false }} /> */}
               <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
               <Stack.Screen name="ScanIngredient" component={ScanIngredient} options={{ headerShown: false }} />
               <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
