@@ -6,7 +6,6 @@ import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
 import HomePage from "./src/pages/home";
 import HelpPage from "./src/pages/help";
-import RecipeDetail from "./src/pages/detailRecipe";
 import ManageAccountPage from './src/pages/manageAccount';
 import SettingPage from './src/pages/setting';
 import ScanPage from './src/pages/scan';
@@ -50,14 +49,6 @@ const Home = () => {
   )
 }
 
-const Detail = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="RecipeDetail" component={RecipeDetail} options={{ headerShown: false }} />
-    </Stack.Navigator>
-  )
-}
-
 const Setting = () => {
     return (
         <Stack.Navigator>
@@ -68,20 +59,19 @@ const Setting = () => {
 }
 
 const ScanIngredient = () => {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="ScanPage" component={ScanPage} options={{headerShown: false}} />
-            <Stack.Screen name="SelectIngredient" component={SelectIngredientPage} options={{headerShown: false}} />
-            <Stack.Screen name="RecipeByScan" component={recipeByScan} options={{headerShown: false}} />
-        </Stack.Navigator>
-    )
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="ScanPage" component={ScanPage} options={{headerShown: false}} />
+      <Stack.Screen name="SelectIngredient" component={SelectIngredientPage} options={{headerShown: false}} />
+      <Stack.Screen name="RecipeByScan" component={recipeByScan} options={{headerShown: false}} />
+    </Stack.Navigator>
+  )
 }
 export {
   Authencitation,
   Home,
-  Detail,
   HelpNavigator,
-    Onboard,
-    Setting,
-    ScanIngredient,
+  Onboard,
+  Setting,
+  ScanIngredient,
 }

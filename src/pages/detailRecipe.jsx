@@ -7,9 +7,9 @@ import BackTopBarNavigator from "../components/backTopBarNavigator.jsx";
 import useRecipeById from "../services/recipe/getRecipeById.js";
 import RecipeCard from "../components/recipeCard.jsx";
 
-const RecipeDetail = () => {
-
-  const { data: recipe, error, isLoading } = useRecipeById(10);
+const RecipeDetail = ({route}) => {
+  const id = route?.params?.recipeId;
+  const { data: recipe, error, isLoading } = useRecipeById(id);
   
   if (isLoading) {
     return (

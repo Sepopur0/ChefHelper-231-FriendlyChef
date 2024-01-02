@@ -7,32 +7,31 @@ const RecipeCard = ({ recipe }) => {
   const {data: category, error: categoryError, isLoading: categoryIsLoading} = useCategory(recipe.category[0]);
 
   const navigation = useNavigation();
+  
+  const toRecipeDetail = () => {
+    navigation.navigate('RecipeDetail', {recipeId: recipe.id})
+  }
 
   // const onPressRecipe = () => {
   //   navigation.navigate('RecipeDetail', { id: recipe.id });
   // };
 
   return(
-      <View style={RecipeCardStyle.container}>
-        <TouchableOpacity onPress={() => navigation.navigate('RecipeDetail', { id: recipe.id })}> 
-        {/* Test API, done test ---> add recipe.id */}
-          <Image
-            style={RecipeCardStyle.image}
-            source={{uri:recipe.images[0]}}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('RecipeDetail', { id: recipe.id })}>
-          <View style={RecipeCardStyle.rowContainer}>
-            <View style={RecipeCardStyle.nameAndCategoryContainer}>
-              <Text style={RecipeCardStyle.recipeNameText}>{recipe.name}</Text>
-              {!categoryIsLoading && <Text style={RecipeCardStyle.smallText}>{category.data.name}</Text>}
-            </View>
-            <View style={RecipeCardStyle.timeContainer}>
-              <Text style={RecipeCardStyle.normalText}>{recipe.time} mins</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
+    <TouchableOpacity style={RecipeCardStyle.container} onPress={toRecipeDetail}>
+      <Image
+        style={RecipeCardStyle.image}
+        source={{uri:recipe.images[0]}}
+      />
+      <View style={RecipeCardStyle.rowContainer}>
+        <View style={RecipeCardStyle.nameAndCategoryContainer}>
+          <Text style={RecipeCardStyle.recipeNameText}>{recipe.name}</Text>
+          {!categoryIsLoading && <Text style={RecipeCardStyle.smallText}>{category.data.name}</Text>}
+        </View>
+        <View style={RecipeCardStyle.timeContainer}>
+          <Text style={RecipeCardStyle.normalText}>{recipe.time} mins</Text>
+        </View>
       </View>
+    </TouchableOpacity>
   )
 }
 export default RecipeCard;

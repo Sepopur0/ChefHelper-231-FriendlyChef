@@ -7,6 +7,7 @@ import { Onboard } from './StackNavigator';
 import RecipeByCategoryPage from './src/pages/recipeByCategory';
 import HomePage from './src/pages/home';
 import { useState, useEffect } from 'react';
+import RecipeDetail from "./src/pages/detailRecipe";
 import AsyncStorage from "@react-native-async-storage/async-storage"; 
 
 const queryClient = new QueryClient();
@@ -42,7 +43,7 @@ export default function App() {
               <Stack.Screen name="Help" component={HelpNavigator} options={{ headerShown: false }} />
               <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeByCategory" component={RecipeByCategoryPage} options={{headerShown:false}}/>
-              <Stack.Screen name="RecipeDetail" component={Detail} options={{ headerShown: false }} />
+              <Stack.Screen name="RecipeDetail" component={RecipeDetail} options={{ headerShown: false }} />
             </>
           ) : (
             <>
@@ -53,7 +54,7 @@ export default function App() {
               <Stack.Screen name="Help" component={HelpNavigator} options={{ headerShown: false }} />
               <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeByCategory" component={RecipeByCategoryPage} options={{headerShown:false}}/>
-              <Stack.Screen name="RecipeDetail" component={Detail} options={{ headerShown: false }} />
+              <Stack.Screen name="RecipeDetail" component={RecipeDetail} options={{ headerShown: false }} />
             </>
           )}
         </Stack.Navigator>
