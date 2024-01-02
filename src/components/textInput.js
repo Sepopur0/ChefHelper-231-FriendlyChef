@@ -46,6 +46,7 @@ export default function CommonTextInput({
                     color={primarycolor}
                     value={value}
                     onChangeText={onChangeText}
+                    textAlignVertical='top'
                     {...props}
                 />
                 {type === "hide" ? hide() : (type === "cancelable" ? cancel() : null)}

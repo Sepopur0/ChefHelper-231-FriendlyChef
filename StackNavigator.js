@@ -4,7 +4,7 @@ import LoginPage from "./src/pages/login";
 import RegisterPage from "./src/pages/register";
 import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
-
+import UploadPage from "./src/pages/upload";
 const Stack = createStackNavigator()
 
 const Authencitation = () => {
@@ -23,7 +23,15 @@ const Onboard = () => {
         </Stack.Navigator>
     )
 }
+const Main=()=>{
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Upload" component={UploadPage} options={{ headerShown: false }} />
+        </Stack.Navigator>
+    )
+}
 export {
     Authencitation,
-    Onboard
+    Onboard,
+    Main
 }

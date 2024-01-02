@@ -4,25 +4,22 @@ const stepStyle = StyleSheet.create({
     container: {
         flexDirection:'row',
         padding:5,
+        paddingLeft:7,
     },
     stepContainer:{
-
+        width:'100%',
     },
     sideBar:{
         padding:8,
-        flexDirection:'column',
-        alignItems:'center',
-        justifyContent:'center'
     },
     header: {
-        paddingHorizontal: 8,
-        paddingVertical: 1,
+        paddingHorizontal: 12,
         justifyContent: 'space-between',
         flexDirection: 'row',
         width: '100%',
     },
     headerText:{
-        fontSize:20,
+        fontSize:14,
         color:colorPalette.color11,
         marginLeft:'8%'
     },
@@ -32,10 +29,11 @@ const stepStyle = StyleSheet.create({
         borderRadius: 15,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding:3
     },
     smallText: {
-        color: colorPalette.color10,
+        color: colorPalette.color4,
         fontSize:14,
         marginTop: '2%',
         marginBottom: '1%',
@@ -45,9 +43,15 @@ const stepStyle = StyleSheet.create({
         borderColor:colorPalette.color4,
         borderWidth: 1,
         borderRadius: 15,
-        textAlignVertical: 'top',
-        minHeight: 100,
-        maxHeight: 150,
+        color:colorPalette.color4,
+        paddingLeft:10,
+    },
+    singleLineInputText:{
+        borderColor:colorPalette.color4,
+        borderWidth: 1,
+        borderRadius: 15,
+        minHeight:40,
+        paddingLeft:8
     },
     uploadImageText: {
         fontSize: 10,
@@ -62,8 +66,8 @@ const stepStyle = StyleSheet.create({
         width: '90%',
     },
     image: {
-        width: '100%',
-        height: '100%'
+        width: 40,
+        height: 40
     },
     imageView: {
         padding: 10,

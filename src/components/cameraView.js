@@ -46,10 +46,9 @@ export default function CameraView({
         });
         if (result.canceled) return;
         else {
-            setMediaOutput(result.assets.uri);
-            postCaptureAction();
+            setMediaOutput(result.assets[0].uri);
+            // postCaptureAction();
         }
-
     }
 
     return (
