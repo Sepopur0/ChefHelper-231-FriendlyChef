@@ -3,10 +3,11 @@ import { View, TouchableOpacity, Text, Image } from "react-native";
 import BottomSheet from '@gorhom/bottom-sheet';
 import { SelectIngredientStyle } from "../style/scanStyle";
 import { useNavigation } from "@react-navigation/native"; // Import useNavigation
+import { ScrollView } from "react-native-gesture-handler";
 
 export default SelectIngredient = ({ingredients, selectedIngredients}) => {
   const navigation = useNavigation();
-  const snapPoints = useMemo(()=>['25%', '40%', '65%',  '100%'], []);
+  const snapPoints = useMemo(()=>['10%', '25%', '40%', '65%',  '100%'], []);
   const [localIngredients, setLocalIngredients] = useState(ingredients);
   const [localselectedIngredients, setLocalSelectedIngredients] = useState(selectedIngredients);
 
@@ -36,7 +37,7 @@ export default SelectIngredient = ({ingredients, selectedIngredients}) => {
       snapPoints={snapPoints}
       backgroundStyle={{backgroundColor:'#202729'}}
     >
-      <View style={SelectIngredientStyle.bottomSheetContainer}>
+      <ScrollView style={SelectIngredientStyle.bottomSheetContainer}>
         <View style={SelectIngredientStyle.rowContainer}>
           <Text style={SelectIngredientStyle.title}>Ingredients</Text>
           <Text 
@@ -62,7 +63,7 @@ export default SelectIngredient = ({ingredients, selectedIngredients}) => {
           </TouchableOpacity>)
         })}
         </View>
-      </View>
+      </ScrollView>
     </BottomSheet>
   )
 }
