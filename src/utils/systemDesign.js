@@ -10,6 +10,8 @@ const colorPalette={
     color9:'#FCA100',
     color10:'#656565',
     color11:'#E47B06',
-    color12:'#1C0E0D'
+    color12:'#1C0E0D',
+    color13:'#000000',
+    color14:'#1B1B1C',
 }
 export {colorPalette}

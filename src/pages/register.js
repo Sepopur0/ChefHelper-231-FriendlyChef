@@ -6,6 +6,8 @@ import { colorPalette } from "../utils/systemDesign";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { welcomeStyle } from "../style/welcomeStyle";
+import useRegister from '../services/auth/register';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { LoginRegisterBackGround } from "../components/linearGradients";
 
 export default function RegisterPage() {
@@ -15,15 +17,60 @@ export default function RegisterPage() {
     const [email, changeEmail] = useState('');
     const [password, changePassword] = useState('');
     const [verifyPassword, changeVerifyPassword] = useState('');
+
+    //data for calling login api
+    const [emailInput,setEmailInput]=useState('');
+    const [passwordInput,setPasswordInput]=useState('');
+    const [userNameInput,setUserNameInput]=useState('');
     //display input error
     const [error, changeError] = useState('');
+    const { isLoading, isError, data: registerData, error: registerError } = useRegister(userNameInput, passwordInput, emailInput);
 
     const registerWithGoogle = () => {
 
     }
-    const register = () => {
-
-    }
+    
+    const register = async () => {
+        try {
+            changeError('');
+    
+            if (name.trim() === '') {
+                changeError('Name field is left empty');
+            } else if (email.trim() === '') {
+                changeError('Email field is left empty');
+            } else if (password.trim() === '') {
+                changeError('Password field is left empty');
+            } else if (password !== verifyPassword) {
+                changeError('Password does not match');
+            } else {
+                setUserNameInput(name);
+                setEmailInput(email);
+                setPasswordInput(password);
+    
+                if (!isLoading) {
+                    const accessToken = registerData?.data?.accessToken;
+    
+                    if (accessToken) {
+                        await AsyncStorage.setItem('accessToken', accessToken);
+                        navigation.navigate('Home');
+                    } else {
+                        changeError('Email or username has already been used');
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Error during registration:', error);
+    
+            // Check if the error has a response object
+            if (error.response) {
+                // Set the error to error.response.data.message
+                changeError(error.response.data.message);
+            } else {
+                changeError('An unexpected error occurred');
+            }
+        }
+    };
+    
     const back = () => {
         navigation.goBack()
     }
@@ -38,7 +85,7 @@ export default function RegisterPage() {
                 </View>
                 <ScrollView contentContainerStyle={welcomeStyle.common}>
                     <Text style={welcomeStyle.titletext}>Register</Text>
-                    <Text style={welcomeStyle.smalltext}>{error}</Text>
+                    <Text style={[welcomeStyle.smalltext, {color: 'red'}]}>{error}</Text>
 
                     <Text style={welcomeStyle.smallText}>Enter your name</Text>
                     <CommonTextInput placeholder={"Your name"} type="cancelable" value={name} onChangeText={(e) => { changeName(e) }} />

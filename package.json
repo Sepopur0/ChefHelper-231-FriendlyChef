@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
+    "start:tunnel": "expo start --tunnel",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -10,10 +11,15 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
+    "@gorhom/bottom-sheet": "^4.5.1",
+    "@react-native-async-storage/async-storage": "1.18.2",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/stack": "^6.3.20",
+    "axios": "^1.6.2",
+    "axios-retry": "^4.0.0",
     "@reduxjs/toolkit": "^1.9.7",
     "expo": "~49.0.15",
+    "expo-image-picker": "~14.3.2",
     "expo-camera": "~13.4.4",
     "expo-file-system": "~15.4.5",
     "expo-image-picker": "^14.5.0",
@@ -24,7 +30,12 @@
     "react-native": "0.72.6",
     "react-native-element-dropdown": "^2.10.1",
     "react-redux": "^8.1.3",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "react-native-gesture-handler": "~2.12.0",
+    "react-native-paper": "^5.11.4",
+    "react-native-reanimated": "~3.3.0",
+    "react-native-status-bar-height": "^2.6.0",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
