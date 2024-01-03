@@ -51,6 +51,7 @@ export default SettingPage = () => {
   }
   const toHelp = () => {
     //Navigate to help page
+    navigation.navigate('Help');
   }
 
   const toAboutUs = () => {

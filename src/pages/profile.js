@@ -17,8 +17,8 @@ export default function ProfilePage() {
     const [isLogin, setIsLogin] = useState(false);
     const { data: profileData, isError, isLoading: isLoading, error: profileError } = useProfile(accessToken);
     const [avatar, setAvatar] = useState('https://s.net.vn/wU5m');
-    const [name, setName] = useState("User");
-    const [userName, setUserName] = useState("username");
+    const [name, setName] = useState("user01");
+    const [userName, setUserName] = useState("Topher Nguyen");
     const [isUserRecipe, setIsUserRecipe] = useState(true);//recipe or bookmark
     let uploadedData = []
     let bookmarkedData = []
@@ -47,11 +47,11 @@ export default function ProfilePage() {
         }
         if (isLogin && profileData?.data) {
             setAvatar(profileData.data.avatar || 'https://s.net.vn/wU5m');
-            setUserName(profileData.data.userName || "username")
+            setUserName(profileData.data.userName || "Topher Nguyen")
             if (profileData.data.fullName) {
                 setName(profileData.data.fullName);
             } else {
-                setName(profileData.data.userName || 'User');
+                setName(profileData.data.userName || 'user01');
             }
             getRecipes(profileData.data.id);
         }
@@ -61,8 +61,11 @@ export default function ProfilePage() {
         navigation.navigate('Authencitation')
     }
 
-    const toRecipesByCategory = (id, name, isCommon) => {
-        navigation.navigate("RecipeByCategory", { id: id, name: name });
+    const uploadRecipe = () => {
+        if(!isLogin){
+            navigation.navigate('Authencitation')
+        }
+        navigation.navigate('UploadPage')
     }
 
     if (isLoading) {
@@ -114,7 +117,7 @@ export default function ProfilePage() {
                     </View>
                 </View>}
             <View style={{ width: '100%', alignItems: 'center', position: 'absolute', bottom: '11%', left: '7%' }}>
-                <CommonButton width="50%" style={ProfileStyle.uploadButton} action={()=>{navigation.navigate('UploadPage')}}>
+                <CommonButton width="50%" style={ProfileStyle.uploadButton} action={uploadRecipe}>
                     <Feather name="plus-circle" size={24} color="black" />
                     <Text style={[ProfileStyle.buttonText, { fontWeight: 300, color: colorPalette.color13 }]}>Upload recipe</Text>
                 </CommonButton>
