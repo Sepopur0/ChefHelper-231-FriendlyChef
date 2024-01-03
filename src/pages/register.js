@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, ImageBackground,ScrollView} from "react-native";
+import { View, Text, ScrollView, Image, ImageBackground } from "react-native";
 import CommonButton from "../components/button";
 import CommonTextInput from "../components/textInput";
 import { colorPalette } from "../utils/systemDesign";
@@ -11,21 +11,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { LoginRegisterBackGround } from "../components/linearGradients";
 
 export default function RegisterPage() {
-    const navigation=useNavigation();
+    const navigation = useNavigation();
     //get input from text
-    const [name,changeName]=useState('');
-    const [email,changeEmail]=useState('');
-    const [password,changePassword]=useState('');
-    const [verifyPassword,changeVerifyPassword]=useState('');
+    const [name, changeName] = useState('');
+    const [email, changeEmail] = useState('');
+    const [password, changePassword] = useState('');
+    const [verifyPassword, changeVerifyPassword] = useState('');
 
     //data for calling login api
     const [emailInput,setEmailInput]=useState('');
     const [passwordInput,setPasswordInput]=useState('');
     const [userNameInput,setUserNameInput]=useState('');
     //display input error
-    const [error,changeError]=useState('');
+    const [error, changeError] = useState('');
     const { isLoading, isError, data: registerData, error: registerError } = useRegister(userNameInput, passwordInput, emailInput);
-    
+
     const registerWithGoogle = () => {
 
     }
@@ -77,28 +77,29 @@ export default function RegisterPage() {
     return (
         <View style={{ flex: 1 }}>
             <ImageBackground source={require('../../assets/Onboarding.png')} resizeMode="stretch" style={welcomeStyle.bgimg}>
-                <View style={welcomeStyle.common}>
-                    <View style={{ width: '100%' }}>
-                        <CommonButton width="20%" containerStyle={{}} style={{ flexDirection: 'row' }} action={back}>
-                            <MaterialCommunityIcons name="chevron-left" size={24} color={colorPalette.color12} />
-                            <Text style={{ color: colorPalette.color12, fontSize: 18 }}>Back</Text>
-                        </CommonButton>
-                    </View>
+                <View style={{ width: '100%',marginTop:'12%' }}>
+                    <CommonButton width="20%" containerStyle={{}} style={{ flexDirection: 'row' }} action={back}>
+                        <MaterialCommunityIcons name="chevron-left" size={24} color={colorPalette.color12} />
+                        <Text style={{ color: colorPalette.color12, fontSize: 18 }}>Back</Text>
+                    </CommonButton>
+                </View>
+                <ScrollView contentContainerStyle={welcomeStyle.common}>
                     <Text style={welcomeStyle.titletext}>Register</Text>
                     <Text style={[welcomeStyle.smalltext, {color: 'red'}]}>{error}</Text>
+
                     <Text style={welcomeStyle.smallText}>Enter your name</Text>
-                    <CommonTextInput placeholder={"Your name"} type="cancelable" value={name} onChangeText={(e)=>{changeName(e)}}/>
+                    <CommonTextInput placeholder={"Your name"} type="cancelable" value={name} onChangeText={(e) => { changeName(e) }} />
 
                     <Text style={welcomeStyle.smallText}>Enter your email</Text>
-                    <CommonTextInput placeholder={"Your email"} type="cancelable" value={email} onChangeText={(e)=>{changeEmail(e)}}/>
+                    <CommonTextInput placeholder={"Your email"} type="cancelable" value={email} onChangeText={(e) => { changeEmail(e) }} />
 
                     <Text style={welcomeStyle.smallText}>Enter your password</Text>
-                    <CommonTextInput placeholder={"Your password"} type="hide" value={password} onChangeText={(e)=>{changePassword(e)}}/>
+                    <CommonTextInput placeholder={"Your password"} type="hide" value={password} onChangeText={(e) => { changePassword(e) }} />
 
                     <Text style={welcomeStyle.smallText}>Verify your password</Text>
-                    <CommonTextInput placeholder={"Verify your password"} type="hide" value={verifyPassword} onChangeText={(e)=>{changeVerifyPassword(e)}}/>
+                    <CommonTextInput placeholder={"Verify your password"} type="hide" value={verifyPassword} onChangeText={(e) => { changeVerifyPassword(e) }} />
 
-                    <View style={{height:'3%'}}>
+                    <View style={{ height: '3%' }}>
 
                     </View>
 
@@ -118,7 +119,7 @@ export default function RegisterPage() {
                         <Image source={require('../../assets/google.png')} style={{ width: 28, height: 28 }} />
                         <Text style={{ color: colorPalette.color10, paddingLeft: 8 }}>Continue with Google</Text>
                     </CommonButton>
-                </View>
+                </ScrollView>
             </ImageBackground>
         </View>
     )

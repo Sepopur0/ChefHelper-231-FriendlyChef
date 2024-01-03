@@ -10,29 +10,28 @@ export default function CommonTextInput({
     primarycolor=colorPalette.color10,
     type = "default", // "default","password","cancelable"
     placeholder,
-    fontSize=24,
+    iconSize=24,
     value,
     onChangeText,
     ...props
 }) {
-    const [currentText, setCurrentText] = useState("");
     const [hideState, setHideState] = useState(false);
     const hide = () => {
         return hideState?(
             <TouchableOpacity onPress={()=>setHideState(!hideState)}>
-                <MaterialCommunityIcons name="eye-outline" size={fontSize} color={primarycolor} />
+                <MaterialCommunityIcons name="eye-outline" size={iconSize} color={primarycolor} />
             </TouchableOpacity>
         )
         :(
             <TouchableOpacity onPress={()=>setHideState(!hideState)}>
-                <MaterialCommunityIcons name="eye-off-outline" size={fontSize} color={primarycolor} />
+                <MaterialCommunityIcons name="eye-off-outline" size={iconSize} color={primarycolor} />
             </TouchableOpacity>
         );
     }
     const cancel = () => {
         return (
             <TouchableOpacity onPress={()=>{onChangeText("")}}>
-                <MaterialCommunityIcons name="close-circle-outline" size={fontSize} color={primarycolor} />
+                <MaterialCommunityIcons name="close-circle-outline" size={iconSize} color={primarycolor} />
             </TouchableOpacity>
         );
     }
@@ -47,6 +46,7 @@ export default function CommonTextInput({
                     color={primarycolor}
                     value={value}
                     onChangeText={onChangeText}
+                    textAlignVertical='top'
                     {...props}
                 />
                 {type === "hide" ? hide() : (type === "cancelable" ? cancel() : null)}

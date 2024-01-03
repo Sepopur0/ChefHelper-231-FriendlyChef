@@ -5,13 +5,14 @@ import RegisterPage from "./src/pages/register";
 import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
 import HomePage from "./src/pages/home";
-import HelpPage from "./src/pages/help";
 import ManageAccountPage from './src/pages/manageAccount';
 import SettingPage from './src/pages/setting';
 import ScanPage from './src/pages/scan';
 import SelectIngredientPage from './src/pages/selectIngredientPage';
 import RecipeByCategoryPage from './src/pages/recipeByScan';
 import recipeByScan from "./src/pages/recipeByScan";
+import UploadPage from "./src/pages/upload";
+import ProfilePage from "./src/pages/profile";
 const Stack = createStackNavigator()
 
 const Authencitation = () => {
@@ -32,21 +33,20 @@ const Onboard = () => {
   )
 }
 
-const HelpNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Help" component={HelpPage} options={{ headerShown: false }} />
-    </Stack.Navigator>
-  );
-};
-
-
 const Home = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="HomePage" component={HomePage} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
+}
+const Profile=()=>{
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="ProfilePage" component={ProfilePage} options={{ headerShown: false }} />
+            <Stack.Screen name="UploadPage" component={UploadPage} options={{ headerShown: false }} />
+        </Stack.Navigator>
+    )
 }
 
 const Setting = () => {
@@ -70,8 +70,8 @@ const ScanIngredient = () => {
 export {
   Authencitation,
   Home,
-  HelpNavigator,
   Onboard,
+    Profile,
   Setting,
   ScanIngredient,
 }

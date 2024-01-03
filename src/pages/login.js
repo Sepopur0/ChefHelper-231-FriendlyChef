@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
+import { View, Text, Image, ImageBackground, ScrollView } from "react-native";
 import CommonButton from "../components/button";
 import CommonTextInput from "../components/textInput";
 import { colorPalette } from "../utils/systemDesign";
@@ -13,15 +13,15 @@ export default function LoginPage() {
     const navigation = useNavigation();
 
     //get input from text
-    const [email,changeEmail]=useState('');
-    const [password,changePassword]=useState('');
+    const [email, changeEmail] = useState('');
+    const [password, changePassword] = useState('');
     //data for calling login api
     const [emailInput,setEmailInput]=useState('');
     const [passwordInput,setPasswordInput]=useState('');
     //display input error
-    const [error,changeError]=useState('');
+    const [error, changeError] = useState('');
     const { isLoading, isError, data: loginData, error: loginError } = useLogin(emailInput, passwordInput);
-    
+
     const loginWithGoogle = () => {
 
     }
@@ -62,26 +62,26 @@ export default function LoginPage() {
     const recovery = () => {
 
     }
-    const back=()=>{
+    const back = () => {
         navigation.goBack()
     }
     return (
         <View style={{ flex: 1 }}>
             <ImageBackground source={require('../../assets/Onboarding.png')} resizeMode="stretch" style={welcomeStyle.bgimg}>
-                <View style={welcomeStyle.common}>
-                    <View style={{width:'100%'}}>
-                        <CommonButton width="20%" containerStyle={{}} style={{flexDirection:'row'}} action={back}>
+                <View style={{ width: '100%', marginTop: '12%' }}>
+                    <CommonButton width="20%" containerStyle={{}} style={{ flexDirection: 'row' }} action={back}>
                         <MaterialCommunityIcons name="chevron-left" size={24} color={colorPalette.color12} />
-                        <Text style={{color:colorPalette.color12, fontSize:18}}>Back</Text>
-                        </CommonButton>
-                    </View>
+                        <Text style={{ color: colorPalette.color12, fontSize: 18 }}>Back</Text>
+                    </CommonButton>
+                </View>
+                <ScrollView contentContainerStyle={welcomeStyle.common}>
                     <Text style={welcomeStyle.titletext}>Sign In</Text>
                     <Text style={[welcomeStyle.smalltext, {color: 'red'}]}>{error}</Text>
                     <Text style={welcomeStyle.smallText}>Enter your email</Text>
-                    <CommonTextInput placeholder={"Your email"} type="cancelable" value={email} onChangeText={(e)=>{changeEmail(e)}}/>
+                    <CommonTextInput placeholder={"Your email"} type="cancelable" value={email} onChangeText={(e) => { changeEmail(e) }} />
 
                     <Text style={welcomeStyle.smallText}>Enter your password</Text>
-                    <CommonTextInput placeholder={"Your password"} type="hide" value={password} onChangeText={(e)=>{changePassword(e)}}/>
+                    <CommonTextInput placeholder={"Your password"} type="hide" value={password} onChangeText={(e) => { changePassword(e) }} />
 
                     <CommonButton style={{}} containerStyle={welcomeStyle.recoveryContainer} width="100%" action={recovery}>
                         <Text style={[welcomeStyle.smallText, { color: colorPalette.color6, width: '100%' }]}>Recover password?</Text>
@@ -108,7 +108,7 @@ export default function LoginPage() {
                     <CommonButton style={{}} containerStyle={{}} width="40%" action={toRegister}>
                         <Text style={[welcomeStyle.text, { color: '#4461F2' }]}>Register here!</Text>
                     </CommonButton>
-                </View>
+                </ScrollView>
             </ImageBackground>
         </View>
     )

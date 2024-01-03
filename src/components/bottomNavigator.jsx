@@ -9,6 +9,7 @@ export default BottomNavigator = ({buttonIndex}) => {
   }
   const toProfile = () => {
     //
+    navigation.navigate('Profile')
   }
   const toScan = () => {
     navigation.navigate('ScanIngredient')
@@ -29,7 +30,7 @@ export default BottomNavigator = ({buttonIndex}) => {
           />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={BottomNavigatorStyle.image3}>
+      <TouchableOpacity style={BottomNavigatorStyle.image3} onPress={toProfile}>
         <Image
           style={BottomNavigatorStyle.image}
           source={buttonIndex==3?require('../../assets/profile-yellow-button.png'):require('../../assets/profile-white-button.png')}

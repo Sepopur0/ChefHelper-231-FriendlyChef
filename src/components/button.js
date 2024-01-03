@@ -10,7 +10,7 @@ export default function CommonButton({
 }) {
 	return (
 		<View style={[containerStyle==null?defaultStyle.container:containerStyle, {width:width}]}>
-			<TouchableOpacity onPress={action} style={style==null?defaultStyle.button:style}>
+			<TouchableOpacity onPress={action} style={style==null?defaultStyle.button:style} {...props}>
 				{props.children}
 			</TouchableOpacity>
 		</View>

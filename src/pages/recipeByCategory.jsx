@@ -32,7 +32,7 @@ export default RecipeByCategoryPage = ({route}) => {
       return (
         <SafeAreaView style={HomeStyle.container}>
           <StatusBar style={HomeStyle.statusBar}/>
-          <Text style={HomeStyle.categoryText}>Loading...</Text>
+          <Text style={[HomeStyle.categoryText,{marginTop:'50%'}]}>Loading...</Text>
         </SafeAreaView>
       );
     }
@@ -69,7 +69,7 @@ export default RecipeByCategoryPage = ({route}) => {
     return (
       <SafeAreaView style={HomeStyle.container}>
         <StatusBar style={HomeStyle.statusBar}/>
-        <Text style={HomeStyle.categoryText}>Loading...</Text>
+        <Text style={[HomeStyle.categoryText,{marginTop:'50%'}]}>Loading...</Text>
       </SafeAreaView>
     );
   }
