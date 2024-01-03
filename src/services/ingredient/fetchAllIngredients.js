@@ -6,5 +6,5 @@ const fetchIngredients = async () => {
   return response.data.result;
 }
 
-const useIngredients = () => useQuery([`${BACKEND_API_PREFIX}category`], () => fetchIngredients());
+const useIngredients = () => useQuery([`${BACKEND_API_PREFIX}ingredient`], () => fetchIngredients());
 export default useIngredients;
