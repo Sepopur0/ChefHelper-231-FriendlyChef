@@ -116,13 +116,13 @@ export default function ProfilePage() {
 
                     </View>
                 </View>}
-            <View style={{ width: '100%', alignItems: 'center', position: 'absolute', bottom: '11%', left: '7%' }}>
-                <CommonButton width="50%" style={ProfileStyle.uploadButton} action={uploadRecipe}>
+            {isLogin?<View style={{ width: '100%', alignItems: 'center', position: 'absolute', bottom: '11%', left: '7%' }}>
+                <CommonButton width="50%" style={ProfileStyle.uploadButton} action={()=>{navigation.navigate('UploadPage')}}>
                     <Feather name="plus-circle" size={24} color="black" />
                     <Text style={[ProfileStyle.buttonText, { fontWeight: 300, color: colorPalette.color13 }]}>Upload recipe</Text>
                 </CommonButton>
-            </View>
-            <BottomNavigator buttonIndex={1} />
+            </View>:null}
+            <BottomNavigator buttonIndex={3} />
         </SafeAreaView>
     );
 }
