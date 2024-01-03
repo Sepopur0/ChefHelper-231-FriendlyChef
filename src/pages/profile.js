@@ -53,12 +53,12 @@ export default function ProfilePage() {
             } else {
                 setName(profileData.data.userName || 'User');
             }
-            getRecipes(profileData.data.id);
+            // getRecipes(profileData.data.id);
         }
     }, [isLogin, profileData]);
 
     const toLogin = () => {
-        navigation.navigate('Authencitation')
+        navigation.navigate('Login')
     }
 
     const toRecipesByCategory = (id, name, isCommon) => {
@@ -113,12 +113,16 @@ export default function ProfilePage() {
 
                     </View>
                 </View>}
-            {isLogin?<View style={{ width: '100%', alignItems: 'center', position: 'absolute', bottom: '11%', left: '7%' }}>
-                <CommonButton width="50%" style={ProfileStyle.uploadButton} action={()=>{navigation.navigate('UploadPage')}}>
-                    <Feather name="plus-circle" size={24} color="black" />
-                    <Text style={[ProfileStyle.buttonText, { fontWeight: 300, color: colorPalette.color13 }]}>Upload recipe</Text>
-                </CommonButton>
-            </View>:null}
+            {isLogin ?
+                <View style={{position: 'absolute', bottom: '10%', left: 0,right:0 }}>
+                    <View style={{ width: '100%', alignItems: 'center', }}>
+                        <CommonButton width="45%" style={ProfileStyle.uploadButton} action={() => { navigation.navigate('UploadPage') }}>
+                            <Feather name="plus-circle" size={24} color="black" />
+                            <Text style={[ProfileStyle.buttonText, { fontWeight: 300, color: colorPalette.color13 }]}>Upload recipe</Text>
+                        </CommonButton>
+                    </View>
+
+                </View> : null}
             <BottomNavigator buttonIndex={3} />
         </SafeAreaView>
     );
@@ -149,6 +153,7 @@ const ProfileStyle = StyleSheet.create({
         width: 700,
         height: 900,
         marginTop: '20%',
+       paddingHorizontal:20,
         position: 'absolute',
         overflow: 'hidden'
     },
@@ -171,7 +176,7 @@ const ProfileStyle = StyleSheet.create({
     button: {
         flexDirection: 'row',
         backgroundColor: colorPalette.color11,
-        minHeight: 60,
+        minHeight: 50,
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 10,
