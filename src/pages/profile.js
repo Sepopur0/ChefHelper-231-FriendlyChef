@@ -119,7 +119,7 @@ export default function ProfilePage() {
                     <Text style={[ProfileStyle.buttonText, { fontWeight: 300, color: colorPalette.color13 }]}>Upload recipe</Text>
                 </CommonButton>
             </View>:null}
-            <BottomNavigator buttonIndex={0} />
+            <BottomNavigator buttonIndex={3} />
         </SafeAreaView>
     );
 }
