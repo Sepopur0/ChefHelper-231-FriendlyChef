@@ -6,11 +6,14 @@ import {
   Text,
   Image,
   ScrollView,
+  Animated,
 } from "react-native";
 import { RecipeDetailStyle } from "../style/detailRecipeStyle.js";
 import RecipeGuide from "../components/recipe-guide.jsx";
 import BackTopBarNavigator from "../components/backTopBarNavigator.jsx";
 import useRecipeById from "../services/recipe/getRecipeById.js";
+
+import Swiper from "react-native-swiper";
 
 const RecipeDetail = ({ route }) => {
   const id = route?.params?.recipeId;
@@ -61,13 +64,27 @@ const RecipeDetail = ({ route }) => {
           </Text>
           <Text style={RecipeDetailStyle.timeText}> {recipe.time} minutes</Text>
           <Text style={RecipeDetailStyle.calorieText}>
-            {" "}
             {recipe.calorie} calories
           </Text>
-          <Image
-            style={RecipeDetailStyle.image}
-            source={{ uri: recipe.images[0] }}
-          />
+          <Swiper
+            style={RecipeDetailStyle.imageContainer}
+            showsButtons={false}
+            autoplay={true}
+            dotStyle={RecipeDetailStyle.dotStyle}
+            activeDotStyle={RecipeDetailStyle.activeDotStyle}
+          >
+            {recipe.images.map((image, index) => {
+              console.log({ image });
+              return (
+                <View key={index}>
+                  <Image
+                    style={RecipeDetailStyle.image}
+                    source={{ uri: image }}
+                  />
+                </View>
+              );
+            })}
+          </Swiper>
           <RecipeGuide guide={recipe.guide} />
         </View>
       </ScrollView>

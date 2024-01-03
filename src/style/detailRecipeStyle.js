@@ -52,6 +52,30 @@ export const RecipeDetailStyle = StyleSheet.create({
     width: '100%',
     borderRadius: 20,
     height: 200,
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
   },
+  swiperImage: {
+    width: '100%',
+    borderRadius: 20,
+    height: 200,
+    // backgroundColor: "red",
+  },
+  imageContainer: {
+    width: '100%',
+    borderRadius: 20,
+    height: 200,
+  },
+  activeDotStyle: {
+    backgroundColor: colorPalette.color4,
+    marginBottom: -30,
+    width: 40,
+    height: 6,
+  },
+  dotStyle: {
+    backgroundColor: colorPalette.color4,
+    width: 6,
+    height: 6,
+    borderRadius: 4,
+    marginBottom: -30,
+  }
 });
