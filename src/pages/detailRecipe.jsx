@@ -16,35 +16,35 @@ import Swiper from "react-native-swiper";
 const RecipeDetail = ({ route }) => {
   const id = route?.params?.recipeId;
   const { data: recipe, error, isLoading } = useRecipeById(id);
-  const [swiperIndex, setSwiperIndex] = useState(0);
+  // const [swiperIndex, setSwiperIndex] = useState(0);
 
-  useEffect(() => {
-    let swiperInterval;
+  // useEffect(() => {
+  //   let swiperInterval;
 
-    const prefetchImages = async () => {
-      try {
-        await Promise.all(recipe.images.map((image) => Image.prefetch(image)));
-        setSwiperIndex(0); // Reset swiperIndex after images are prefetched
-        swiperInterval = setInterval(() => {
-          setSwiperIndex((prevIndex) => (prevIndex + 1) % recipe.images.length);
-        }, 3000);
-      } catch (error) {
-        console.error("Lỗi tải trước ảnh:", error);
-      }
-    };
+  //   const prefetchImages = async () => {
+  //     try {
+  //       await Promise.all(recipe.images.map((image) => Image.prefetch(image)));
+  //       setSwiperIndex(0); // Reset swiperIndex after images are prefetched
+  //       swiperInterval = setInterval(() => {
+  //         setSwiperIndex((prevIndex) => (prevIndex + 1) % recipe.images.length);
+  //       }, 3000);
+  //     } catch (error) {
+  //       console.error("Lỗi tải trước ảnh:", error);
+  //     }
+  //   };
 
-    if (recipe && recipe.images && recipe.images.length > 0) {
-      prefetchImages();
-    }
+  //   if (recipe && recipe.images && recipe.images.length > 0) {
+  //     prefetchImages();
+  //   }
 
-    return () => {
-      clearInterval(swiperInterval);
-    };
-  }, [recipe]);
+  //   return () => {
+  //     clearInterval(swiperInterval);
+  //   };
+  // }, [recipe]);
 
-  const onIndexChanged = (index) => {
-    setSwiperIndex(index);
-  };
+  // const onIndexChanged = (index) => {
+  //   setSwiperIndex(index);
+  // };
 
   if (isLoading) {
     return (
@@ -96,8 +96,9 @@ const RecipeDetail = ({ route }) => {
             showsButtons={false}
             dotStyle={RecipeDetailStyle.dotStyle}
             activeDotStyle={RecipeDetailStyle.activeDotStyle}
-            index={swiperIndex}
-            onIndexChanged={onIndexChanged}
+            // index={swiperIndex}
+            // onIndexChanged={onIndexChanged}
+            autoplay={true}
           >
             {recipe.images.map((image, index) => {
               const imageElement = (
@@ -107,8 +108,7 @@ const RecipeDetail = ({ route }) => {
                 />
               );
               return (
-                <View style={{ flex: 1 }} key={index}>
-                  {/* <Text style={RecipeDetailStyle.timeText}>{index}</Text> */}
+                <View style={{ flex: 1, height: 200 }} key={index}>
                   {imageElement}
                 </View>
               );
