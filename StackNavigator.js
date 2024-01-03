@@ -5,7 +5,6 @@ import RegisterPage from "./src/pages/register";
 import Welcome from "./src/pages/welcome";
 import Onboarding from "./src/pages/onboarding";
 import HomePage from "./src/pages/home";
-import HelpPage from "./src/pages/help";
 import ManageAccountPage from './src/pages/manageAccount';
 import SettingPage from './src/pages/setting';
 import ScanPage from './src/pages/scan';
@@ -33,15 +32,6 @@ const Onboard = () => {
     </Stack.Navigator>
   )
 }
-
-const HelpNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Help" component={HelpPage} options={{ headerShown: false }} />
-    </Stack.Navigator>
-  );
-};
-
 
 const Home = () => {
   return (
@@ -80,7 +70,6 @@ const ScanIngredient = () => {
 export {
   Authencitation,
   Home,
-  HelpNavigator,
   Onboard,
     Profile,
   Setting,

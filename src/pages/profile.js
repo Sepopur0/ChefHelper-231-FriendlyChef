@@ -17,8 +17,8 @@ export default function ProfilePage() {
     const [isLogin, setIsLogin] = useState(false);
     const { data: profileData, isError, isLoading: isLoading, error: profileError } = useProfile(accessToken);
     const [avatar, setAvatar] = useState('https://s.net.vn/wU5m');
-    const [name, setName] = useState("User");
-    const [userName, setUserName] = useState("username");
+    const [name, setName] = useState("user01");
+    const [userName, setUserName] = useState("Topher Nguyen");
     const [isUserRecipe, setIsUserRecipe] = useState(true);//recipe or bookmark
     let uploadedData = []
     let bookmarkedData = []
@@ -47,11 +47,11 @@ export default function ProfilePage() {
         }
         if (isLogin && profileData?.data) {
             setAvatar(profileData.data.avatar || 'https://s.net.vn/wU5m');
-            setUserName(profileData.data.userName || "username")
+            setUserName(profileData.data.userName || "Topher Nguyen")
             if (profileData.data.fullName) {
                 setName(profileData.data.fullName);
             } else {
-                setName(profileData.data.userName || 'User');
+                setName(profileData.data.userName || 'user01');
             }
             // getRecipes(profileData.data.id);
         }
@@ -61,8 +61,11 @@ export default function ProfilePage() {
         navigation.navigate('Login')
     }
 
-    const toRecipesByCategory = (id, name, isCommon) => {
-        navigation.navigate("RecipeByCategory", { id: id, name: name });
+    const uploadRecipe = () => {
+        if(!isLogin){
+            navigation.navigate('Authencitation')
+        }
+        navigation.navigate('UploadPage')
     }
 
     if (isLoading) {

@@ -7,6 +7,7 @@ import RecipeByCategoryPage from './src/pages/recipeByCategory';
 import HomePage from './src/pages/home';
 import { useState, useEffect } from 'react';
 import RecipeDetail from "./src/pages/detailRecipe";
+import HelpPage from "./src/pages/help";
 import AsyncStorage from "@react-native-async-storage/async-storage"; 
 
 const queryClient = new QueryClient();
@@ -40,7 +41,7 @@ export default function App() {
               <Stack.Screen name="Authencitation" component={Authencitation} options={{ headerShown: false }} />
               <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
               <Stack.Screen name="ScanIngredient" component={ScanIngredient} options={{ headerShown: false }} />
-              <Stack.Screen name="Help" component={HelpNavigator} options={{ headerShown: false }} />
+              <Stack.Screen name="Help" component={HelpPage} options={{ headerShown: false }} />
               <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeByCategory" component={RecipeByCategoryPage} options={{headerShown:false}}/>
               <Stack.Screen name="RecipeDetail" component={RecipeDetail} options={{ headerShown: false }} />
@@ -50,7 +51,7 @@ export default function App() {
             <>      
               <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
               <Stack.Screen name="ScanIngredient" component={ScanIngredient} options={{ headerShown: false }} />
-              <Stack.Screen name="Help" component={HelpNavigator} options={{ headerShown: false }} />
+              <Stack.Screen name="Help" component={HelpPage} options={{ headerShown: false }} />
               <Stack.Screen name="Setting" component={Setting} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeByCategory" component={RecipeByCategoryPage} options={{headerShown:false}}/>
               <Stack.Screen name="RecipeDetail" component={RecipeDetail} options={{ headerShown: false }} />
