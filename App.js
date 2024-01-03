@@ -2,7 +2,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Authencitation as Authencitation, Setting, ScanIngredient, HelpNavigator, Detail,Onboard,Profile } from './StackNavigator';
+import { Authencitation, Setting, ScanIngredient, HelpNavigator, Detail,Onboard,Profile } from './StackNavigator';
 import RecipeByCategoryPage from './src/pages/recipeByCategory';
 import HomePage from './src/pages/home';
 import { useState, useEffect } from 'react';
