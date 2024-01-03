@@ -87,24 +87,27 @@ export const SelectIngredientStyle = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between', // Adjust as needed
+    flexWrap: 'wrap', // Allow items to wrap to the next row
     width: '100%',
     height: 'auto',
     marginVertical: 10,
     paddingHorizontal: 0,
   },
   ingredientContainer: {
-    width: '22%',
+    width: '25%', // Updated to 25% to fit four items in a row
     backgroundColor: '#2B2D2D',
     alignItems: 'center',
     borderRadius: 20,
     marginHorizontal: '1%',
+    marginVertical: 5, // Adjust as needed for vertical spacing
   },
   ingredientContainerSelected: {
-    width: '22%',
+    width: '25%', // Updated to 25% to fit four items in a row
     backgroundColor: '#4B5052',
     alignItems: 'center',
     borderRadius: 20,
     marginHorizontal: '1%',
+    marginVertical: 5, // Adjust as needed for vertical spacing
   },
   image: {
     width: 30,

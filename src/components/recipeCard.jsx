@@ -1,11 +1,23 @@
 import useCategory from '../services/recipe/getCategoryById';
-import useCategories from '../services/recipe/fetchAllCategories';
 import { RecipeCardStyle } from '../style/recipeCardStyle';
-import { View, Text, Image } from 'react-native';
-const RecipeCard = ({recipe}) => {
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
+
+const RecipeCard = ({ recipe }) => {
   const {data: category, error: categoryError, isLoading: categoryIsLoading} = useCategory(recipe.category[0]);
+
+  const navigation = useNavigation();
+  
+  const toRecipeDetail = () => {
+    navigation.navigate('RecipeDetail', {recipeId: recipe.id})
+  }
+
+  // const onPressRecipe = () => {
+  //   navigation.navigate('RecipeDetail', { id: recipe.id });
+  // };
+
   return(
-    <View style={RecipeCardStyle.container}>
+    <TouchableOpacity style={RecipeCardStyle.container} onPress={toRecipeDetail}>
       <Image
         style={RecipeCardStyle.image}
         source={{uri:recipe.images[0]}}
@@ -19,7 +31,7 @@ const RecipeCard = ({recipe}) => {
           <Text style={RecipeCardStyle.normalText}>{recipe.time} mins</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 export default RecipeCard;
