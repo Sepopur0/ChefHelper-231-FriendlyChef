@@ -9,7 +9,6 @@ const RecipeGuide = ({ guide }) => {
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>
       {guide.map((item, index) => {
-        console.log(item.image);
         return (
           <Collapse style={RecipeGuideStyle.container}>
             {/* <View style={RecipeGuideStyle.container}> */}

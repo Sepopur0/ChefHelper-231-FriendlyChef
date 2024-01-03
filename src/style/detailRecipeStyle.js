@@ -61,9 +61,7 @@ export const RecipeDetailStyle = StyleSheet.create({
     // backgroundColor: "red",
   },
   imageContainer: {
-    width: '100%',
-    borderRadius: 20,
-    height: 200,
+   
   },
   activeDotStyle: {
     backgroundColor: colorPalette.color4,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   SafeAreaView,
@@ -49,9 +49,6 @@ const RecipeDetail = ({ route }) => {
       </SafeAreaView>
     );
   }
-
-  console.log({ recipe });
-
   return (
     <SafeAreaView style={RecipeDetailStyle.container}>
       <ScrollView style={RecipeDetailStyle.contentContainer}>
@@ -74,13 +71,16 @@ const RecipeDetail = ({ route }) => {
             activeDotStyle={RecipeDetailStyle.activeDotStyle}
           >
             {recipe.images.map((image, index) => {
-              console.log({ image });
+              const imageElement = (
+                <Image
+                  style={RecipeDetailStyle.image}
+                  source={{ uri: image }}
+                />
+              );
               return (
-                <View key={index}>
-                  <Image
-                    style={RecipeDetailStyle.image}
-                    source={{ uri: image }}
-                  />
+                <View style={{ flex: 1 }} key={index}>
+                  {/* <Text style={RecipeDetailStyle.timeText}>{index}</Text> */}
+                  {imageElement}
                 </View>
               );
             })}
