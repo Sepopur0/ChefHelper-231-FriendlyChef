@@ -33,11 +33,11 @@ export default SettingPage = () => {
   
   useEffect(() => {
     if (isLogin && profileData?.data) {
-      setAvatar(profileData.data.avatar ?? '');
+      setAvatar(profileData.data.avatar || 'https://s.net.vn/wU5m');
       if (profileData.data.fullName) {
         setName(profileData.data.fullName);
       } else {
-        setName(profileData.data.userName || 'Not login yet');
+        setName(profileData.data.userName || 'User');
       }
     }
   }, [isLogin, profileData]);
@@ -61,7 +61,7 @@ export default SettingPage = () => {
     if(isLogin){
       await AsyncStorage.removeItem('accessToken')
     }
-    navigation.navigate('Login')
+    navigation.navigate('Authencitation')
   }
 
   return (

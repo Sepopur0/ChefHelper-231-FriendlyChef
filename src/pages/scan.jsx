@@ -20,8 +20,6 @@ export default ScanPage = () => {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       setFile(result);
       setImage(result.assets[0].uri);

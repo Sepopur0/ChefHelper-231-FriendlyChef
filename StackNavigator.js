@@ -11,6 +11,7 @@ import SelectIngredientPage from './src/pages/selectIngredientPage';
 import RecipeByCategoryPage from './src/pages/recipeByScan';
 import recipeByScan from "./src/pages/recipeByScan";
 import UploadPage from "./src/pages/upload";
+import ProfilePage from "./src/pages/profile";
 const Stack = createStackNavigator()
 
 const Authencitation = () => {
@@ -29,10 +30,11 @@ const Onboard = () => {
         </Stack.Navigator>
     )
 }
-const Upload=()=>{
+const Profile=()=>{
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Upload" component={UploadPage} options={{ headerShown: false }} />
+            <Stack.Screen name="ProfilePage" component={ProfilePage} options={{ headerShown: false }} />
+            <Stack.Screen name="UploadPage" component={UploadPage} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }
@@ -58,7 +60,7 @@ const ScanIngredient = () => {
 export {
     Authencitation,
     Onboard,
-    Upload,
+    Profile,
     Setting,
     ScanIngredient,
 }

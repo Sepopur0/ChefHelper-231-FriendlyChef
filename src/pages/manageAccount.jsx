@@ -25,7 +25,7 @@ export default ManageAccountPage = ({route}) => {
       <SafeAreaView style={ManageAccountStyle.container}>
         <StatusBar style={ManageAccountStyle.statusBar} />
         <BackTopBarNavigator pageName={"Manage Account"} />
-        <Text style={ManageAccountStyle.loadingText}>Loading...</Text>
+        <Text style={[ManageAccountStyle.loadingText,{marginTop:'50%'}]}>Loading...</Text>
       </SafeAreaView>
     )
   }

@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text,useWindowDimensions } from "react-native";
 import * as Camera from "expo-camera";
 import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
 import { colorPalette } from "../utils/systemDesign";
 import CommonButton from "./button";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 //suggestion: wrap this component in a Modal
-//redux: the camera once took an image will send it to redux store, then the related components will fetch and check if the id is correct then use it.
 export default function CameraView({
     width = "100%", // width
     height = "100%", // height
@@ -16,6 +16,7 @@ export default function CameraView({
     setMediaOutput = () => { }, //method to set array of URI of chosen images/videoURI, param: result, which is the uri of new media. Suggest combine with useState
     postCaptureAction=()=>{}, //method after capture image/video
     closeAction=()=>{}, //method when pressing close button
+    ratio="1:1",
     ...props
 }) {
     const cameraRef = useRef();
@@ -23,6 +24,13 @@ export default function CameraView({
     useEffect(() => {
         requestPermissions();
     }, []);
+
+    const aspect = ()=>{
+        const [width,height]=ratio.split(':')
+        const widthLength=useWindowDimensions().width
+        return {width:widthLength,height:widthLength*Number(height)/Number(width)}
+    }
+
     const requestPermissions = async () => {
         await Camera.requestCameraPermissionsAsync();
     };
@@ -43,10 +51,14 @@ export default function CameraView({
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             quality: 1,
+            allowsEditing:true,
+            aspect:[1,1]
         });
         if (result.canceled) return;
         else {
+            // const url=await FileSystem.readAsStringAsync(result.assets[0].uri,{encoding:FileSystem.EncodingType.Base64})
             setMediaOutput(result.assets[0].uri);
+            closeAction();
             // postCaptureAction();
         }
     }
@@ -54,7 +66,7 @@ export default function CameraView({
     return (
         <View style={[containerStyle ? containerStyle : modalStyle.containerStyle, { width: width, height: height }]}>
             {(getPermissions()) ?
-                <Camera.Camera style={modalStyle.cameraContainer} type={type} ref={cameraRef} ratio="16:9">
+                <View style={modalStyle.cameraContainer}>
                     <View style={modalStyle.cameraBanner}>
                         <CommonButton action={closeAction} containerStyle={{}} style={{}} width="10%">
                             <MaterialCommunityIcons name="close" size={32} color={colorPalette.color4} />
@@ -63,7 +75,8 @@ export default function CameraView({
                             <MaterialCommunityIcons name="camera-flip" size={32} color={colorPalette.color4} />
                         </CommonButton>
                     </View>
-                    <View style={modalStyle.cameraBanner}>
+                <Camera.Camera style={aspect()} type={type} ref={cameraRef} ratio={ratio}/>
+                <View style={modalStyle.cameraBanner}>
                         <CommonButton action={pickImage} containerStyle={modalStyle.containerStyle} style={modalStyle.buttonStyle} width="15%" >
                             <MaterialCommunityIcons name="folder-multiple-image" size={32} color={colorPalette.color4} />
                             <Text style={modalStyle.smallText}>Album</Text>
@@ -72,7 +85,7 @@ export default function CameraView({
                             <MaterialCommunityIcons name="camera" size={28} color={colorPalette.color10} />
                         </CommonButton>
                     </View>
-                </Camera.Camera> :
+                </View> :
                 <View style={modalStyle.permissionRequestContainer}>
                     <Text style={modalStyle.text}>Permission for camera accessing not granted</Text>
                     <CommonButton action={requestPermissions} style={{}} containerStyle={{}}>
@@ -110,7 +123,8 @@ const modalStyle = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         width: '100%',
-        height: '100%'
+        height: '100%',
+        backgroundColor:colorPalette.color13
     },
     smallText: {
         fontSize: 12,

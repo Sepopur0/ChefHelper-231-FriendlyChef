@@ -59,15 +59,15 @@ const UploadSteps = forwardRef(function uploadStep({
     const [descriptionValue, setDescriptionValue] = useState(initDesc);
     const [error, setError] = useState("");
     const [updateFlag, setUpdateFlag] = useState(false);
-    const maxMedia = recipe ? 3 : 2;
+    const maxMedia = recipe ? 3 : 1;
     useImperativeHandle(ref, () => ({
         // getImage:()=>imageURI,
         // getDesc:()=>descriptionValue,
         getData() {
             return {
                 idx: idx,
-                imageURI: imageURI,
-                desc: descriptionValue,
+                image: imageURI,
+                description: descriptionValue,
                 state: collapsed
             }
         },
@@ -112,9 +112,9 @@ const UploadSteps = forwardRef(function uploadStep({
                             <Text style={[stepStyle.smallText, { fontSize: !recipe ? 12 : 14 }]}>Add photo</Text>
                             <View style={{ flexDirection: 'row' }}>
                                 {imageURI.length > 0 ? imageURI.map((e, idx) => {
-                                    return <View style={stepStyle.imageView} key={i}>
-                                        <Image source={{ uri: imageURI[i] }} resizeMode="center" style={stepStyle.image} />
-                                        <CommonButton action={() => { removeImage(i); }} containerStyle={stepStyle.imageButtonContainer} style={stepStyle.imageButton} width="10%">
+                                    return <View style={stepStyle.imageView} key={idx}>
+                                        <Image source={{ uri: imageURI[idx] }} resizeMode="center" style={stepStyle.image} />
+                                        <CommonButton action={() => { removeImage(idx); }} containerStyle={stepStyle.imageButtonContainer} style={stepStyle.imageButton} width="10%">
                                             <MaterialCommunityIcons name="close" size={8} color={colorPalette.color4} />
                                         </CommonButton>
                                     </View>

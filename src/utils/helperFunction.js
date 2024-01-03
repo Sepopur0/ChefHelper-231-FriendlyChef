@@ -7,7 +7,6 @@ const checkUploadImage = async (result) => {
         if (!fileInfo?.size) {
             return "Can't select file! The size is unknown."
         }
-        console.log(fileInfo.size)
         if (fileInfo.size / 1024 / 1024 > imageSize) {
             return "Image's size must be smaller than " + imageSize.toString() + "MB!";
         }

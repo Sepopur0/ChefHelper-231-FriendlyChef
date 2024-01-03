@@ -17,7 +17,7 @@ export default RecipeByCategoryPage = ({route}) => {
       <SafeAreaView style={HomeStyle.container}>
         <StatusBar style={HomeStyle.statusBar}/>
         <BackTopBarNavigator pageName={"Matching Recipes"}/>
-        <Text style={HomeStyle.categoryText}>Loading...</Text>
+        <Text style={[HomeStyle.categoryText,{marginTop:'50%'}]}>Loading...</Text>
       </SafeAreaView>
     );
   }
