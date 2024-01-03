@@ -21,7 +21,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA"
+      ],
+      "package": "com.thuanbkk20.ChefHelper231FriendlyChef"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -39,6 +44,11 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a70d156d-5755-4a39-9a66-b6079740f8ad"
+      }
+    }
   }
 }
