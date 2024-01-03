@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   },
   toggleText: {
     fontSize: 14,
+    marginBottom: 12,
     fontWeight: "bold",
     color: colorPalette.color2,
   }, 
@@ -196,15 +197,11 @@ export default function HelpPage() {
 
         <Text></Text>
         <Text style={styles.sectionTitle}>Contact Us</Text>
-        <Text style={styles.contactInfo}>Email: topher_nguyen@gmail.com</Text>
+        <Text style={styles.contactInfo}>Email: trongphu012345@gmail.com</Text>
         <Text style={styles.contactInfo}>Phone: (+84) 838 972 219</Text>
 
         <Text style={styles.sectionTitle}>Feedback</Text>
         <Text style={styles.feedbackText}>We value your feedback! Please let us know how we can improve.</Text>
-
-        <TouchableOpacity style={styles.feedbackButton} onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.buttonText}>Give Feedback</Text>
-        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
