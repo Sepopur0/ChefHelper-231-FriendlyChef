@@ -115,7 +115,7 @@ function UploadPage() {
         setFinalData(finalData)
         // console.log(finalData)
         const finalResult=await fetchRecipe(recipeData)
-        
+        navigation.navigate('Home')
     }
     const deleteStep = (idx) => {
         if (stepList.length <= 2) return;
