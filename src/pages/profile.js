@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, SafeAreaView, StatusBar, Text, Image, TouchableOpacity, TextInput, StyleSheet } from "react-native";
+import { View, SafeAreaView, StatusBar, Text, Image, ScrollView, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
 import useProfile from "../services/auth/profile";
-
+import { useRecipeUploadedByUser, fetchRecipeUploadedByUser } from "../services/recipe/fetchUserRecipes";
+import { useRecipeBookmarkedByUser, fetchRecipeBookmarkedByUser } from "../services/recipe/fetchBookmarkedRecipeById";
+import { Feather } from '@expo/vector-icons';
+import RecipeCard from "../components/recipeCard";
+import BottomNavigator from "../components/bottomNavigator";
 import CommonTopBarNavigator from "../components/topBarNavigator";
 import CommonButton from "../components/button";
 import { colorPalette } from "../utils/systemDesign";
@@ -16,6 +20,8 @@ export default function ProfilePage() {
     const [name, setName] = useState("User");
     const [userName, setUserName] = useState("username");
     const [isUserRecipe, setIsUserRecipe] = useState(true);//recipe or bookmark
+    let uploadedData = []
+    let bookmarkedData = []
     const navigation = useNavigation();
     useEffect(() => {
         const fetchAccessToken = async () => {
@@ -32,6 +38,13 @@ export default function ProfilePage() {
         fetchAccessToken();
     }, []);
     useEffect(() => {
+        async function getRecipes(id) {
+            const { data: uploadedRecipes, error: uploadedRecipeError, isLoading: uploadedRecipeIsLoading } = await fetchRecipeUploadedByUser(id);
+            uploadedData = uploadedRecipes
+
+            const { data: bookmarkedRecipes, error: bookmarkedRecipeError, isLoading: bookmarkedRecipeIsLoading } = await fetchRecipeBookmarkedByUser(id);
+            bookmarkedData = bookmarkedRecipes
+        }
         if (isLogin && profileData?.data) {
             setAvatar(profileData.data.avatar || 'https://s.net.vn/wU5m');
             setUserName(profileData.data.userName || "username")
@@ -40,11 +53,16 @@ export default function ProfilePage() {
             } else {
                 setName(profileData.data.userName || 'User');
             }
+            getRecipes(profileData.data.id);
         }
     }, [isLogin, profileData]);
 
     const toLogin = () => {
         navigation.navigate('Authencitation')
+    }
+
+    const toRecipesByCategory = (id, name, isCommon) => {
+        navigation.navigate("RecipeByCategory", { id: id, name: name });
     }
 
     if (isLoading) {
@@ -70,28 +88,38 @@ export default function ProfilePage() {
                 </View> :
                 <View style={ProfileStyle.main}>
                     <View style={ProfileStyle.background} />
-                    <View style={{width:'100%'}}>
+                    <View style={{ width: '100%' }}>
                         <View style={ProfileStyle.imageContainer}>
                             <Image
                                 source={{ uri: avatar }}
                                 style={ProfileStyle.image}
                             />
                             <Text style={ProfileStyle.nameText}>{name}</Text>
-                        <Text style={[ProfileStyle.text, { color: colorPalette.color13 }]}>{userName}</Text>
+                            <Text style={[ProfileStyle.text, { color: colorPalette.color13 }]}>{userName}</Text>
                         </View>
                         <View style={ProfileStyle.buttonContainer}>
                             {/* button */}
-                            <CommonButton width="40%" style={[ProfileStyle.smallButton,{backgroundColor:isUserRecipe?colorPalette.color11:colorPalette.color6}]} action={() => { setIsUserRecipe(true) }}>
-                                <Text style={[ProfileStyle.buttonText,{color:colorPalette.color13}]}> My recipes</Text>
+                            <CommonButton width="45%" style={[ProfileStyle.smallButton, { backgroundColor: isUserRecipe ? colorPalette.color11 : colorPalette.color6 }]} action={() => { setIsUserRecipe(true) }}>
+                                <Text style={[ProfileStyle.buttonText, { color: colorPalette.color13 }]}> My recipes</Text>
                             </CommonButton>
-                            <CommonButton width="40%" style={[ProfileStyle.smallButton,{backgroundColor:!isUserRecipe?colorPalette.color11:colorPalette.color6}]} action={() => { setIsUserRecipe(false) }}>
-                                <Text style={[ProfileStyle.buttonText,{color:colorPalette.color13}]}> My bookmark</Text>
+                            <CommonButton width="45%" style={[ProfileStyle.smallButton, { backgroundColor: !isUserRecipe ? colorPalette.color11 : colorPalette.color6 }]} action={() => { console.log(uploadedData); setIsUserRecipe(false) }}>
+                                <Text style={[ProfileStyle.buttonText, { color: colorPalette.color13 }]}> My bookmark</Text>
                             </CommonButton>
                         </View>
-                        
+                        <ScrollView>
+
+                        </ScrollView>
+
+
                     </View>
                 </View>}
-
+            <View style={{ width: '100%', alignItems: 'center', position: 'absolute', bottom: '11%', left: '7%' }}>
+                <CommonButton width="50%" style={ProfileStyle.uploadButton} action={()=>{navigation.navigate('UploadPage')}}>
+                    <Feather name="plus-circle" size={24} color="black" />
+                    <Text style={[ProfileStyle.buttonText, { fontWeight: 300, color: colorPalette.color13 }]}>Upload recipe</Text>
+                </CommonButton>
+            </View>
+            <BottomNavigator buttonIndex={1} />
         </SafeAreaView>
     );
 }
@@ -100,6 +128,7 @@ const ProfileStyle = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 30,
+        paddingHorizontal: 20,
         backgroundColor: colorPalette.color13,
     },
     centering: {
@@ -109,8 +138,8 @@ const ProfileStyle = StyleSheet.create({
         height: '100%'
     },
     main: {
+        flex: 1,
         alignItems: 'center',
-        height: '100%',
         width: '100%',
     },
     background: {
@@ -120,7 +149,8 @@ const ProfileStyle = StyleSheet.create({
         width: 700,
         height: 900,
         marginTop: '20%',
-        position: 'absolute'
+        position: 'absolute',
+        overflow: 'hidden'
     },
     text: {
         fontSize: 20,
@@ -152,7 +182,7 @@ const ProfileStyle = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         paddingHorizontal: '5%',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     smallButton: {
@@ -164,6 +194,16 @@ const ProfileStyle = StyleSheet.create({
         opacity: 0.9,
         borderRadius: 20,
         width: '100%'
+    },
+    uploadButton: {
+        flexDirection: 'row',
+        paddingHorizontal: '10%',
+        justifyContent: 'space-between',
+        backgroundColor: colorPalette.color1,
+        height: 40,
+        alignItems: 'center',
+        opacity: 0.9,
+        borderRadius: 20,
     },
     statusBar: {
         animated: true,

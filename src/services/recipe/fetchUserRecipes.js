@@ -23,4 +23,4 @@ const useRecipeUploadedByUser = (id) => {
   return useQuery([`${BACKEND_API_PREFIX}recipe/uploaded-by`, id], () => fetchRecipeUploadedByUser(id), {});
 };
 
-export default useRecipeUploadedByUser;
+export {useRecipeUploadedByUser,fetchRecipeUploadedByUser};
